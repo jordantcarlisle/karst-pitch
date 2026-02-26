@@ -966,6 +966,69 @@
       letter-spacing: -0.01em;
     }
 
+    /* ========== DOCUMENTS ========== */
+    .documents {
+      padding: 6rem 2rem;
+      background: var(--cave-dark);
+      text-align: center;
+    }
+
+    .documents .section-label { color: var(--cedar); }
+    .documents .section-title { color: var(--warm-white); margin-bottom: 1rem; }
+    .documents .section-subtitle {
+      color: var(--riverstone);
+      font-size: 1.0625rem;
+      max-width: 560px;
+      margin: 0 auto 3rem;
+    }
+
+    .doc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .doc-card {
+      background: var(--cave-mid);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 1.75rem 1.5rem;
+      text-align: left;
+      text-decoration: none;
+      transition: border-color 0.2s, transform 0.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .doc-card:hover {
+      border-color: var(--cedar);
+      transform: translateY(-2px);
+    }
+
+    .doc-card .doc-icon {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cedar);
+    }
+
+    .doc-card .doc-title {
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--warm-white);
+      line-height: 1.4;
+    }
+
+    .doc-card .doc-desc {
+      font-size: 0.8125rem;
+      color: var(--riverstone);
+      line-height: 1.5;
+    }
+
     /* ========== FOOTER ========== */
     footer {
       padding: 3rem 2rem;
@@ -1141,6 +1204,7 @@
         <li><a href="#investment">Investment</a></li>
         <li><a href="#team">Team</a></li>
         <li><a href="#ask">The Ask</a></li>
+        <li><a href="#documents">Documents</a></li>
       </ul>
       <button class="hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -1772,6 +1836,52 @@
     </div>
   </section>
 
+  <!-- DOCUMENTS -->
+  <section class="documents" id="documents">
+    <div class="container">
+      <div class="section-label">Documents</div>
+      <h2 class="section-title">Deep-dive materials.</h2>
+      <p class="section-subtitle">Download the full research and planning documents behind the KARST concept.</p>
+      <div class="doc-grid">
+        <a href="pdfs/KARST%20%E2%80%94%20Vision%20Document.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon">PDF</div>
+          <div class="doc-title">Vision Document</div>
+          <div class="doc-desc">The complete concept narrative — philosophy, experience design, and brand vision.</div>
+        </a>
+        <a href="pdfs/KARST%20%E2%80%94%20Business%20Model.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon">PDF</div>
+          <div class="doc-title">Business Model</div>
+          <div class="doc-desc">Revenue streams, unit economics, membership tiers, and financial projections.</div>
+        </a>
+        <a href="pdfs/KARST%20%E2%80%94%20Market%20Research.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon">PDF</div>
+          <div class="doc-title">Market Research</div>
+          <div class="doc-desc">Bentonville demographics, competitive landscape, and demand analysis.</div>
+        </a>
+        <a href="pdfs/KARST%20%E2%80%94%20Comparable%20Concepts.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon">PDF</div>
+          <div class="doc-title">Comparable Concepts</div>
+          <div class="doc-desc">Benchmark facilities — pricing, membership models, and performance data.</div>
+        </a>
+        <a href="pdfs/KARST%20%E2%80%94%20Architecture%20Brief.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon">PDF</div>
+          <div class="doc-title">Architecture Brief</div>
+          <div class="doc-desc">Design intent, spatial program, material palette, and site integration.</div>
+        </a>
+        <a href="pdfs/KARST%20%E2%80%94%20Architect%20References.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon">PDF</div>
+          <div class="doc-title">Architect References</div>
+          <div class="doc-desc">Visual references and precedent studies for the architectural direction.</div>
+        </a>
+        <a href="pdfs/KARST%20%E2%80%94%20Brand%20Direction.pdf" class="doc-card" target="_blank">
+          <div class="doc-icon">PDF</div>
+          <div class="doc-title">Brand Direction</div>
+          <div class="doc-desc">Name rationale, visual identity system, typography, and color palette.</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer>
     <div class="footer-logo">KARST</div>
@@ -1817,7 +1927,7 @@
     });
 
     // Scroll animations
-    const animateEls = document.querySelectorAll('.value-card, .level, .tier, .comp-card, .risk-item, .team-member, .phase');
+    const animateEls = document.querySelectorAll('.value-card, .level, .tier, .comp-card, .risk-item, .team-member, .phase, .doc-card');
     const animObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
