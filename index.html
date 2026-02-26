@@ -1,0 +1,1821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KARST — Ancient ground. Present moment.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ========== RESET & BASE ========== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --charcoal: #2C2C2C;
+      --cedar: #B87333;
+      --limestone: #E8E0D4;
+      --riverstone: #9B958C;
+      --spring: #6B8F8E;
+      --warm-white: #FAF7F2;
+      --cave-dark: #1A1A1A;
+      --cave-mid: #222222;
+
+      --font-display: 'Instrument Serif', Georgia, serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--charcoal);
+      background: var(--warm-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection { background: var(--cedar); color: var(--warm-white); }
+
+    /* ========== NAVIGATION ========== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(250, 247, 242, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(44, 44, 44, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    nav.scrolled { box-shadow: 0 1px 20px rgba(0,0,0,0.06); }
+
+    nav .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    nav .logo {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      color: var(--charcoal);
+      text-decoration: none;
+    }
+
+    nav .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    nav .nav-links a {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--riverstone);
+      text-decoration: none;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    nav .nav-links a:hover,
+    nav .nav-links a.active { color: var(--charcoal); }
+
+    nav .nav-links a.active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 1.5px;
+      background: var(--cedar);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+
+    .hamburger span {
+      width: 22px;
+      height: 1.5px;
+      background: var(--charcoal);
+      transition: all 0.3s;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: var(--cave-dark);
+      background-image: url('renders/exterior.jpg');
+      background-size: cover;
+      background-position: center;
+      color: var(--warm-white);
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(26,26,26,0.7) 0%, rgba(26,26,26,0.5) 40%, rgba(26,26,26,0.7) 100%);
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .hero-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--riverstone);
+      margin-bottom: 3rem;
+    }
+
+    .hero h1 {
+      font-family: var(--font-mono);
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      margin-bottom: 1.5rem;
+      color: var(--warm-white);
+    }
+
+    .hero .tagline {
+      font-family: var(--font-display);
+      font-size: clamp(1.25rem, 3vw, 1.75rem);
+      font-style: italic;
+      color: var(--limestone);
+      margin-bottom: 3rem;
+      letter-spacing: -0.01em;
+    }
+
+    .hero .location {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--riverstone);
+      margin-bottom: 4rem;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--riverstone);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-family: var(--font-mono);
+      opacity: 0.6;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .scroll-indicator .line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--riverstone), transparent);
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.8; }
+    }
+
+    /* ========== SECTIONS ========== */
+    section { padding: 6rem 2rem; }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .container--wide { max-width: 1100px; }
+
+    /* Section headers */
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--cedar);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-subtitle {
+      font-size: 1.125rem;
+      color: var(--riverstone);
+      max-width: 640px;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+    }
+
+    /* ========== THESIS (dark) ========== */
+    .thesis {
+      background: var(--charcoal);
+      color: var(--warm-white);
+      padding: 6rem 2rem;
+    }
+
+    .thesis .section-label { color: var(--cedar); }
+
+    .thesis .section-subtitle { color: var(--limestone); }
+
+    .value-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .value-card {
+      padding: 2rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 2px;
+      transition: border-color 0.2s;
+    }
+
+    .value-card:hover { border-color: rgba(184, 115, 51, 0.3); }
+
+    .value-card h3 {
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.75rem;
+      color: var(--cedar);
+    }
+
+    .value-card p {
+      font-size: 0.9375rem;
+      color: var(--limestone);
+      line-height: 1.6;
+    }
+
+    /* ========== GAP SECTION ========== */
+    .gap-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--limestone);
+      margin-top: 2rem;
+    }
+
+    .gap-item {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--limestone);
+      font-size: 0.9375rem;
+      line-height: 1.5;
+    }
+
+    .gap-item:nth-child(odd) { border-right: 1px solid var(--limestone); }
+    .gap-item:nth-last-child(-n+2) { border-bottom: none; }
+
+    .gap-item.has { color: var(--charcoal); }
+    .gap-item.missing {
+      color: var(--riverstone);
+      font-style: italic;
+    }
+
+    .gap-header {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.75rem 1.5rem;
+      background: var(--limestone);
+      color: var(--charcoal);
+    }
+
+    /* ========== EXPERIENCE / CAVE (dark) ========== */
+    .experience {
+      background: var(--cave-dark);
+      color: var(--warm-white);
+      padding: 8rem 2rem;
+      position: relative;
+    }
+
+    .experience::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 70%, rgba(184, 115, 51, 0.06) 0%, transparent 50%);
+    }
+
+    .experience .container { position: relative; z-index: 1; }
+    .experience .section-label { color: var(--cedar); }
+    .experience .section-subtitle { color: var(--limestone); }
+
+    .levels {
+      display: grid;
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+
+    .level {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 2rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .level:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .level-name {
+      font-family: var(--font-display);
+      font-size: 1.125rem;
+      font-style: italic;
+      color: var(--cedar);
+    }
+
+    .level-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--riverstone);
+      margin-top: 0.25rem;
+    }
+
+    .level-description {
+      font-size: 0.9375rem;
+      color: var(--limestone);
+      line-height: 1.7;
+    }
+
+    .level-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .level-features span {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 0.3rem 0.75rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--riverstone);
+      border-radius: 1px;
+    }
+
+    /* ========== NARRATIVE ========== */
+    .narrative {
+      background: var(--cave-mid);
+      color: var(--warm-white);
+      padding: 6rem 2rem;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .narrative blockquote {
+      font-family: var(--font-display);
+      font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+      font-style: italic;
+      color: var(--limestone);
+      line-height: 1.6;
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+      letter-spacing: -0.01em;
+    }
+
+    /* ========== CONTENT ENGINE ========== */
+    .content-engine {
+      background: var(--charcoal);
+      color: var(--warm-white);
+      padding: 6rem 2rem;
+    }
+
+    .content-engine .section-label { color: var(--cedar); }
+
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin: 2.5rem 0;
+    }
+
+    .media-card {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .media-card .amount {
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      color: var(--cedar);
+      margin-bottom: 0.5rem;
+    }
+
+    .media-card .label {
+      font-size: 0.8125rem;
+      color: var(--riverstone);
+      line-height: 1.4;
+    }
+
+    .callout {
+      padding: 1.5rem 2rem;
+      border-left: 2px solid var(--spring);
+      background: rgba(107, 143, 142, 0.08);
+      font-size: 0.9375rem;
+      color: var(--limestone);
+      line-height: 1.6;
+      margin-top: 2rem;
+    }
+
+    /* ========== BUSINESS MODEL ========== */
+    .model { padding: 6rem 2rem; }
+
+    .tiers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin: 2.5rem 0 3rem;
+    }
+
+    .tier {
+      padding: 2rem;
+      border: 1px solid var(--limestone);
+      position: relative;
+      transition: border-color 0.2s;
+    }
+
+    .tier:hover { border-color: var(--cedar); }
+
+    .tier.featured {
+      border-color: var(--cedar);
+      background: rgba(184, 115, 51, 0.03);
+    }
+
+    .tier.featured::before {
+      content: 'Most Popular';
+      position: absolute;
+      top: -10px;
+      left: 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--cedar);
+      color: var(--warm-white);
+      padding: 2px 10px;
+    }
+
+    .tier-name {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .tier-price {
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      color: var(--charcoal);
+      margin-bottom: 1rem;
+    }
+
+    .tier-price span { font-size: 0.875rem; color: var(--riverstone); }
+
+    .tier ul {
+      list-style: none;
+      font-size: 0.875rem;
+      color: var(--riverstone);
+      line-height: 1.8;
+    }
+
+    .tier li::before {
+      content: '+';
+      margin-right: 0.5rem;
+      color: var(--cedar);
+      font-weight: 600;
+    }
+
+    /* Revenue table */
+    .revenue-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+    }
+
+    .revenue-table th {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--riverstone);
+      text-align: left;
+      padding: 0.75rem 1rem;
+      border-bottom: 2px solid var(--charcoal);
+    }
+
+    .revenue-table td {
+      font-size: 0.9375rem;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--limestone);
+    }
+
+    .revenue-table td:not(:first-child) {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      text-align: right;
+    }
+
+    .revenue-table th:not(:first-child) { text-align: right; }
+
+    .revenue-table tr:last-child td {
+      font-weight: 600;
+      border-bottom: 2px solid var(--charcoal);
+    }
+
+    .stat-row {
+      display: flex;
+      gap: 3rem;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      text-align: center;
+      flex: 1;
+      min-width: 140px;
+    }
+
+    .stat .number {
+      font-family: var(--font-mono);
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      font-weight: 500;
+      color: var(--charcoal);
+    }
+
+    .stat .desc {
+      font-size: 0.8125rem;
+      color: var(--riverstone);
+      margin-top: 0.25rem;
+    }
+
+    /* ========== COMPARABLES ========== */
+    .comparables { background: var(--limestone); padding: 6rem 2rem; }
+
+    .comp-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .comp-card {
+      background: var(--warm-white);
+      padding: 1.75rem;
+    }
+
+    .comp-card h4 {
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .comp-card .comp-location {
+      font-size: 0.8125rem;
+      color: var(--riverstone);
+      margin-bottom: 1rem;
+    }
+
+    .comp-card .comp-stat {
+      font-family: var(--font-mono);
+      font-size: 1.125rem;
+      color: var(--cedar);
+      margin-bottom: 0.25rem;
+    }
+
+    .comp-card .comp-detail {
+      font-size: 0.8125rem;
+      color: var(--riverstone);
+    }
+
+    /* ========== INVESTMENT ========== */
+    .investment { padding: 6rem 2rem; }
+
+    .invest-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+    }
+
+    .invest-table th {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--riverstone);
+      text-align: left;
+      padding: 0.75rem 1rem;
+      border-bottom: 2px solid var(--charcoal);
+    }
+
+    .invest-table td {
+      font-size: 0.9375rem;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--limestone);
+      vertical-align: top;
+    }
+
+    .invest-table td:nth-child(2) {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      white-space: nowrap;
+    }
+
+    .invest-table tr:last-child td {
+      font-weight: 600;
+      border-bottom: 2px solid var(--charcoal);
+    }
+
+    /* ========== RISK ========== */
+    .risk {
+      background: var(--limestone);
+      padding: 6rem 2rem;
+    }
+
+    .risk-grid {
+      display: grid;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .risk-item {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(44, 44, 44, 0.1);
+    }
+
+    .risk-item:last-child { border-bottom: none; }
+
+    .risk-label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    .risk-mitigation {
+      font-size: 0.9375rem;
+      color: var(--riverstone);
+      line-height: 1.6;
+    }
+
+    /* ========== TEAM ========== */
+    .team { padding: 6rem 2rem; }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin: 2.5rem 0;
+    }
+
+    .team-member {
+      text-align: center;
+    }
+
+    .team-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--limestone);
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-style: italic;
+      color: var(--riverstone);
+    }
+
+    .team-member h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .team-member .role {
+      font-size: 0.8125rem;
+      color: var(--cedar);
+      margin-bottom: 0.5rem;
+    }
+
+    .team-member .bio {
+      font-size: 0.8125rem;
+      color: var(--riverstone);
+      line-height: 1.5;
+    }
+
+    .advisors {
+      margin-top: 3rem;
+      padding: 2rem;
+      background: var(--limestone);
+    }
+
+    .advisors h3 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .advisors ul {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .advisors li {
+      font-size: 0.875rem;
+      color: var(--riverstone);
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .advisors li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 4px;
+      height: 4px;
+      background: var(--cedar);
+      border-radius: 50%;
+    }
+
+    /* ========== TIMELINE ========== */
+    .timeline {
+      background: var(--charcoal);
+      color: var(--warm-white);
+      padding: 6rem 2rem;
+    }
+
+    .timeline .section-label { color: var(--cedar); }
+
+    .timeline-track {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      margin-top: 3rem;
+      position: relative;
+    }
+
+    .timeline-track::before {
+      content: '';
+      position: absolute;
+      top: 24px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: rgba(255,255,255,0.15);
+    }
+
+    .phase {
+      position: relative;
+      padding-top: 3rem;
+    }
+
+    .phase::before {
+      content: '';
+      position: absolute;
+      top: 18px;
+      left: 0;
+      width: 12px;
+      height: 12px;
+      background: var(--cave-dark);
+      border: 2px solid var(--cedar);
+      border-radius: 50%;
+    }
+
+    .phase-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cedar);
+      margin-bottom: 0.25rem;
+    }
+
+    .phase-date {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      color: var(--warm-white);
+      margin-bottom: 0.5rem;
+    }
+
+    .phase-desc {
+      font-size: 0.8125rem;
+      color: var(--riverstone);
+      line-height: 1.5;
+      padding-right: 1rem;
+    }
+
+    /* ========== ASK / CTA ========== */
+    .ask {
+      padding: 8rem 2rem;
+      text-align: center;
+      background: var(--warm-white);
+    }
+
+    .ask .section-title { margin-bottom: 2rem; }
+
+    .ask-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      max-width: 700px;
+      margin: 3rem auto;
+      border: 1px solid var(--limestone);
+      text-align: left;
+    }
+
+    .ask-col {
+      padding: 2rem;
+    }
+
+    .ask-col:first-child { border-right: 1px solid var(--limestone); }
+
+    .ask-col h4 {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cedar);
+      margin-bottom: 1rem;
+    }
+
+    .ask-col ul {
+      list-style: none;
+      font-size: 0.875rem;
+      color: var(--riverstone);
+      line-height: 1.8;
+    }
+
+    .ask-col li::before {
+      content: '+';
+      margin-right: 0.5rem;
+      color: var(--cedar);
+      font-weight: 600;
+    }
+
+    .next-steps {
+      max-width: 540px;
+      margin: 3rem auto 0;
+      text-align: left;
+    }
+
+    .next-steps h3 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .next-steps ol {
+      list-style: none;
+      counter-reset: steps;
+    }
+
+    .next-steps li {
+      counter-increment: steps;
+      padding: 0.75rem 0;
+      padding-left: 2.5rem;
+      position: relative;
+      font-size: 0.9375rem;
+      color: var(--charcoal);
+      border-bottom: 1px solid var(--limestone);
+    }
+
+    .next-steps li:last-child { border-bottom: none; }
+
+    .next-steps li::before {
+      content: counter(steps);
+      position: absolute;
+      left: 0;
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      color: var(--cedar);
+      font-weight: 500;
+    }
+
+    .closing {
+      font-family: var(--font-display);
+      font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+      font-style: italic;
+      color: var(--charcoal);
+      margin-top: 3rem;
+      letter-spacing: -0.01em;
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      padding: 3rem 2rem;
+      background: var(--cave-dark);
+      color: var(--riverstone);
+      text-align: center;
+    }
+
+    footer .footer-logo {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      color: var(--warm-white);
+      margin-bottom: 0.5rem;
+    }
+
+    footer p {
+      font-size: 0.75rem;
+      color: var(--riverstone);
+      opacity: 0.6;
+    }
+
+    /* ========== SEPARATOR ========== */
+    .separator {
+      height: 1px;
+      background: var(--limestone);
+      max-width: 120px;
+      margin: 0 auto;
+    }
+
+    /* ========== ARCHITECTURE DNA ========== */
+    .architecture {
+      background: var(--limestone);
+      padding: 6rem 2rem;
+    }
+
+    .arch-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin: 2.5rem 0;
+    }
+
+    .arch-card h4 {
+      font-family: var(--font-display);
+      font-size: 1.125rem;
+      font-style: italic;
+      margin-bottom: 0.25rem;
+    }
+
+    .arch-card .arch-origin {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cedar);
+      margin-bottom: 0.75rem;
+    }
+
+    .arch-card p {
+      font-size: 0.875rem;
+      color: var(--riverstone);
+      line-height: 1.6;
+    }
+
+    .materials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .materials span {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      padding: 0.4rem 1rem;
+      border: 1px solid var(--riverstone);
+      color: var(--charcoal);
+    }
+
+    /* ========== LEVEL IMAGES ========== */
+    .level-image {
+      width: 100%;
+      border-radius: 8px;
+      margin-top: 1.5rem;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      opacity: 0.9;
+    }
+
+    /* ========== RENDERS GRID ========== */
+    .renders-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 768px) {
+      .renders-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      nav .nav-links { display: none; }
+
+      nav .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        background: var(--warm-white);
+        padding: 1.5rem 2rem;
+        gap: 1rem;
+        border-bottom: 1px solid var(--limestone);
+      }
+
+      .hamburger { display: flex; }
+
+      .gap-grid { grid-template-columns: 1fr; }
+      .gap-item:nth-child(odd) { border-right: none; }
+
+      .level { grid-template-columns: 1fr; gap: 0.75rem; }
+
+      .tiers { grid-template-columns: 1fr; }
+
+      .team-grid { grid-template-columns: 1fr 1fr; }
+
+      .timeline-track {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .timeline-track::before { display: none; }
+
+      .phase { padding-top: 0; padding-left: 2rem; }
+
+      .phase::before { top: 2px; }
+
+      .ask-grid { grid-template-columns: 1fr; }
+      .ask-col:first-child { border-right: none; border-bottom: 1px solid var(--limestone); }
+
+      .arch-grid { grid-template-columns: 1fr; }
+
+      .risk-item { grid-template-columns: 1fr; gap: 0.5rem; }
+
+      .advisors ul { grid-template-columns: 1fr; }
+
+      .comp-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .comp-grid { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: 1fr; }
+      .stat-row { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="#hero" class="logo">KARST</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#thesis">Thesis</a></li>
+        <li><a href="#opportunity">Opportunity</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#model">Model</a></li>
+        <li><a href="#investment">Investment</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#ask">The Ask</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <div class="hero-label">Bentonville, Arkansas</div>
+      <h1>KARST</h1>
+      <p class="tagline">Ancient ground. Present moment.</p>
+      <p class="location">407-409 SE F St &mdash; SE Market District</p>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="line"></div>
+    </div>
+  </section>
+
+  <!-- INVESTMENT THESIS -->
+  <section class="thesis" id="thesis">
+    <div class="container">
+      <div class="section-label">The Investment Thesis</div>
+      <h2 class="section-title" style="color: var(--warm-white)">This concept raises property values for the entire block.</h2>
+      <p class="section-subtitle">Crystal Bridges raised downtown Bentonville property values. 8th Street Market created the SE Market District identity. KARST does the same for this block.</p>
+      <div class="value-grid">
+        <div class="value-card">
+          <h3>Foot Traffic Engine</h3>
+          <p>500-800 daily visits at maturity &mdash; the highest-traffic use available for this site.</p>
+        </div>
+        <div class="value-card">
+          <h3>Demographic Lock</h3>
+          <p>1,500 high-income member households visiting 3x/week &mdash; captive audience for every adjacent tenant.</p>
+        </div>
+        <div class="value-card">
+          <h3>Ice House Synergy</h3>
+          <p>The 2028 redevelopment next door gains an anchor neighbor. Office and retail tenants benefit from a wellness destination on the same block.</p>
+        </div>
+        <div class="value-card">
+          <h3>Brand Halo</h3>
+          <p>A national content brand based at this address elevates the entire district's identity.</p>
+        </div>
+        <div class="value-card">
+          <h3>Ecosystem Completion</h3>
+          <p>The SE Market District has food, art, hospitality, and residential. The one gap is wellness.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE GAP -->
+  <section class="gap-section" id="opportunity">
+    <div class="container">
+      <div class="section-label">The Opportunity</div>
+      <h2 class="section-title">Bentonville has everything &mdash; except the product.</h2>
+      <p class="section-subtitle">The premium wellness market is structurally undersupplied. Every comparable market at this income level supports 3-5 premium wellness destinations. Bentonville has zero.</p>
+      <div class="gap-grid">
+        <div class="gap-item gap-header">What Bentonville Has</div>
+        <div class="gap-item gap-header">What It Doesn't</div>
+        <div class="gap-item has">$112K median household income</div>
+        <div class="gap-item missing">No premium wellness destination</div>
+        <div class="gap-item has">605K+ metro, 22nd fastest-growing</div>
+        <div class="gap-item missing">No multi-modality wellness facility</div>
+        <div class="gap-item has">$2B+ Walton wellness investment</div>
+        <div class="gap-item missing">No thermal / contrast therapy at scale</div>
+        <div class="gap-item has">"Mountain Biking Capital of the World"</div>
+        <div class="gap-item missing">No wellness content brand</div>
+        <div class="gap-item has">Alice Walton School of Medicine (2025)</div>
+        <div class="gap-item missing">No experiential wellness hub</div>
+        <div class="gap-item has">Crystal Bridges &mdash; 600K+ annual visitors</div>
+        <div class="gap-item missing">No wellness tourism anchor</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATALYSTS -->
+  <section style="padding: 6rem 2rem; background: var(--limestone);">
+    <div class="container">
+      <div class="section-label">The Moment</div>
+      <h2 class="section-title">Three catalysts converging on one block.</h2>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 2.5rem;">
+        <div>
+          <h3 style="font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 0.75rem;">Ice House 2028</h3>
+          <p style="font-size: 0.9375rem; color: var(--riverstone); line-height: 1.6;">Acquired late 2025 for $7.5M. The adjacent building becomes a mixed-use destination with condos, commercial, and rooftop garden. This block needs a wellness anchor.</p>
+        </div>
+        <div>
+          <h3 style="font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 0.75rem;">District Investment</h3>
+          <p style="font-size: 0.9375rem; color: var(--riverstone); line-height: 1.6;">8th Street Market, The Momentary, Town Branch (360 units), Compton Hotel, Lightbox, The Holler. The district is being built. The gap is wellness.</p>
+        </div>
+        <div>
+          <h3 style="font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 0.75rem;">Thermal Wellness Boom</h3>
+          <p style="font-size: 0.9375rem; color: var(--riverstone); line-height: 1.6;">$71.7B global market growing 10%/yr. Sauna House expanding to 9+ locations. Othership raised $20.6M. Therme Group committing $1.5B to US entry.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SITE FACTORS -->
+  <section style="padding: 5rem 2rem;">
+    <div class="container">
+      <div class="section-label">The Site</div>
+      <h2 class="section-title">The only site where all five factors converge.</h2>
+      <div style="display: grid; gap: 1rem; margin-top: 2rem;">
+        <div style="display: flex; gap: 1rem; align-items: baseline; padding: 1rem 0; border-bottom: 1px solid var(--limestone);">
+          <span style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--cedar); flex-shrink: 0;">01</span>
+          <div>
+            <strong style="font-size: 0.9375rem;">Trail-connected</strong>
+            <span style="font-size: 0.9375rem; color: var(--riverstone);"> &mdash; Razorback Greenway delivers 92K+ cyclists and 66K+ pedestrians annually to the front door</span>
+          </div>
+        </div>
+        <div style="display: flex; gap: 1rem; align-items: baseline; padding: 1rem 0; border-bottom: 1px solid var(--limestone);">
+          <span style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--cedar); flex-shrink: 0;">02</span>
+          <div>
+            <strong style="font-size: 0.9375rem;">Cultural anchor adjacent</strong>
+            <span style="font-size: 0.9375rem; color: var(--riverstone);"> &mdash; The Momentary drives 500K+ annual visits to this neighborhood</span>
+          </div>
+        </div>
+        <div style="display: flex; gap: 1rem; align-items: baseline; padding: 1rem 0; border-bottom: 1px solid var(--limestone);">
+          <span style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--cedar); flex-shrink: 0;">03</span>
+          <div>
+            <strong style="font-size: 0.9375rem;">Food hub proximity</strong>
+            <span style="font-size: 0.9375rem; color: var(--riverstone);"> &mdash; 8th Street Market (2 blocks) already attracts health-conscious consumers</span>
+          </div>
+        </div>
+        <div style="display: flex; gap: 1rem; align-items: baseline; padding: 1rem 0; border-bottom: 1px solid var(--limestone);">
+          <span style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--cedar); flex-shrink: 0;">04</span>
+          <div>
+            <strong style="font-size: 0.9375rem;">Residential density</strong>
+            <span style="font-size: 0.9375rem; color: var(--riverstone);"> &mdash; Town Branch delivers 360 high-income units within walking distance</span>
+          </div>
+        </div>
+        <div style="display: flex; gap: 1rem; align-items: baseline; padding: 1rem 0;">
+          <span style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--cedar); flex-shrink: 0;">05</span>
+          <div>
+            <strong style="font-size: 0.9375rem;">Ice House catalyst</strong>
+            <span style="font-size: 0.9375rem; color: var(--riverstone);"> &mdash; Adjacent 2028 redevelopment creates a campus, not just a building</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="experience" id="experience">
+    <div class="container">
+      <div class="section-label">The Experience</div>
+      <h2 class="section-title" style="color: var(--warm-white)">A complete wellness journey encoded in architecture.</h2>
+      <p class="section-subtitle">Not a gym. Not a spa. Not a clinic. A cave-to-sky journey through movement, recovery, and renewal.</p>
+      <div class="levels">
+        <div class="level">
+          <div>
+            <div class="level-name">The Cave</div>
+            <div class="level-tag">Underground</div>
+          </div>
+          <div>
+            <p class="level-description">The heart of the building. Contrast therapy at scale in a cell-phone-free sanctuary of stone, cedar, and atmospheric light.</p>
+            <div class="level-features">
+              <span>40-person communal sauna</span>
+              <span>Cold plunges 45-55&deg;F</span>
+              <span>Steam room</span>
+              <span>Mineral baths</span>
+              <span>Wet rooms</span>
+            </div>
+            <img src="renders/cave.jpg" alt="The Cave — underground contrast therapy" class="level-image">
+          </div>
+        </div>
+        <div class="level">
+          <div>
+            <div class="level-name">The Foundation</div>
+            <div class="level-tag">Ground</div>
+          </div>
+          <div>
+            <p class="level-description">Movement meets community. Premium fitness integrated into architecture, not bolted on. Public-facing nutrition bar connects the building to the street.</p>
+            <div class="level-features">
+              <span>Strength floor</span>
+              <span>25ft climbing wall</span>
+              <span>Yoga &amp; Pilates studios</span>
+              <span>Martial arts mat</span>
+              <span>Nutrition bar</span>
+            </div>
+            <img src="renders/foundation.jpg" alt="The Foundation — premium fitness and climbing wall" class="level-image">
+          </div>
+        </div>
+        <div class="level">
+          <div>
+            <div class="level-name">The Canopy</div>
+            <div class="level-tag">Upper</div>
+          </div>
+          <div>
+            <p class="level-description">The intellectual and creative layer. Greenhouse glass, living plant walls, and filtered light. Where the content engine lives.</p>
+            <div class="level-features">
+              <span>Media studio</span>
+              <span>Wellness library</span>
+              <span>Event space</span>
+              <span>Practitioner rooms</span>
+              <span>Cowork nooks</span>
+            </div>
+            <img src="renders/canopy.jpg" alt="The Canopy — greenhouse library and media studio" class="level-image">
+          </div>
+        </div>
+        <div class="level">
+          <div>
+            <div class="level-name">The Sky</div>
+            <div class="level-tag">Rooftop</div>
+          </div>
+          <div>
+            <p class="level-description">The journey's destination. Panoramic Ozark views, outdoor movement, and a rooftop garden echoing the Ice House next door.</p>
+            <div class="level-features">
+              <span>Outdoor lounge</span>
+              <span>Rooftop garden</span>
+              <span>Yoga grass strip</span>
+              <span>Ozark views</span>
+            </div>
+            <img src="renders/rooftop.jpg" alt="The Sky — rooftop terrace with Ozark views" class="level-image">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NARRATIVE QUOTE -->
+  <section class="narrative">
+    <div class="container">
+      <blockquote>You descend into the earth &mdash; stone narrows, light dims, temperature shifts. An hour of contrast therapy. Then you ascend through timber and glass into the canopy &mdash; greenhouse light, living walls, a curated library. You emerge on the rooftop to Ozark hills stretching to the horizon.</blockquote>
+    </div>
+  </section>
+
+  <!-- ARCHITECTURE DNA -->
+  <section class="architecture" id="architecture">
+    <div class="container">
+      <div class="section-label">Design DNA</div>
+      <h2 class="section-title">Ozark-Nordic</h2>
+      <p class="section-subtitle">A fusion of three traditions applied to one building.</p>
+      <div class="arch-grid">
+        <div class="arch-card">
+          <h4>E. Fay Jones</h4>
+          <div class="arch-origin">Ozark</div>
+          <p>Stone, timber, landscape integration, angular rooflines echoing ridgelines. Thorncrown Chapel energy applied to wellness.</p>
+        </div>
+        <div class="arch-card">
+          <h4>Nordic Minimalism</h4>
+          <div class="arch-origin">Scandinavian</div>
+          <p>Cedar, clean lines, sauna culture, atmospheric light. Communal, egalitarian, contemplative. L&ouml;yly Helsinki.</p>
+        </div>
+        <div class="arch-card">
+          <h4>Japanese Onsen</h4>
+          <div class="arch-origin">Japan</div>
+          <p>Water reverence, material honesty, threshold design. The bathing journey as spiritual practice. Kengo Kuma.</p>
+        </div>
+      </div>
+      <div class="materials">
+        <span>Ozark limestone</span>
+        <span>Mass timber</span>
+        <span>Cedar</span>
+        <span>Riverstone</span>
+        <span>Glass</span>
+        <span>Preserved warehouse steel</span>
+      </div>
+      <div style="margin-top: 3rem; text-align: center;">
+        <img src="renders/section.jpg" alt="KARST — architectural cross-section showing all four levels" style="max-height: 600px; width: auto; max-width: 100%; border-radius: 8px; margin: 0 auto;">
+        <p style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--riverstone); margin-top: 1rem;">Conceptual Cross-Section</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONCEPT RENDERS -->
+  <section style="padding: 5rem 2rem; background: var(--limestone);">
+    <div class="container">
+      <div class="section-label">Concept Renders</div>
+      <h2 class="section-title">Visualizing the vision.</h2>
+      <p class="section-subtitle">AI-generated architectural concept renders based on the detailed architecture brief.</p>
+      <div class="renders-grid">
+        <div>
+          <img src="renders/exterior.jpg" alt="Exterior — golden hour" style="width: 100%; border-radius: 8px; aspect-ratio: 16/9; object-fit: cover;">
+          <p style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--riverstone); margin-top: 0.75rem;">Exterior — Golden Hour</p>
+        </div>
+        <div>
+          <img src="renders/cave.jpg" alt="The Cave — contrast therapy" style="width: 100%; border-radius: 8px; aspect-ratio: 16/9; object-fit: cover;">
+          <p style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--riverstone); margin-top: 0.75rem;">The Cave — Underground</p>
+        </div>
+        <div>
+          <img src="renders/foundation.jpg" alt="The Foundation — ground level" style="width: 100%; border-radius: 8px; aspect-ratio: 16/9; object-fit: cover;">
+          <p style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--riverstone); margin-top: 0.75rem;">The Foundation — Ground</p>
+        </div>
+        <div>
+          <img src="renders/canopy.jpg" alt="The Canopy — upper level" style="width: 100%; border-radius: 8px; aspect-ratio: 16/9; object-fit: cover;">
+          <p style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--riverstone); margin-top: 0.75rem;">The Canopy — Upper Level</p>
+        </div>
+        <div>
+          <img src="renders/rooftop.jpg" alt="The Sky — rooftop" style="width: 100%; border-radius: 8px; aspect-ratio: 16/9; object-fit: cover;">
+          <p style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--riverstone); margin-top: 0.75rem;">The Sky — Rooftop</p>
+        </div>
+        <div>
+          <img src="renders/section.jpg" alt="Cross section" style="width: 100%; border-radius: 8px; aspect-ratio: 16/9; object-fit: cover;">
+          <p style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--riverstone); margin-top: 0.75rem;">Architectural Section</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENT ENGINE -->
+  <section class="content-engine">
+    <div class="container">
+      <div class="section-label">The Content Engine</div>
+      <h2 class="section-title" style="color: var(--warm-white)">A built-in media studio creates national brand and revenue.</h2>
+      <p style="font-size: 0.9375rem; color: var(--limestone); line-height: 1.7; max-width: 640px; margin-bottom: 2rem;">The building is designed to be camera-ready from every angle. A dedicated production studio produces nationally-reaching wellness content. The building IS the set.</p>
+      <div class="media-grid">
+        <div class="media-card">
+          <div class="amount">$200-300K</div>
+          <div class="label">Brand Sponsorships</div>
+        </div>
+        <div class="media-card">
+          <div class="amount">$100-150K</div>
+          <div class="label">Affiliate &amp; Referral</div>
+        </div>
+        <div class="media-card">
+          <div class="amount">$50-100K</div>
+          <div class="label">Content Licensing</div>
+        </div>
+        <div class="media-card">
+          <div class="amount">$50-100K</div>
+          <div class="label">Equipment Partnerships</div>
+        </div>
+      </div>
+      <div class="callout">
+        <strong>The financial model works without media revenue.</strong> Base case generates $5.3M at maturity without any content revenue. Media is upside, not a load-bearing assumption.
+      </div>
+    </div>
+  </section>
+
+  <!-- BUSINESS MODEL -->
+  <section class="model" id="model">
+    <div class="container">
+      <div class="section-label">Business Model</div>
+      <h2 class="section-title">Seven revenue streams. Three tiers. $5.3M+ at maturity.</h2>
+
+      <div class="tiers">
+        <div class="tier">
+          <div class="tier-name">Foundation</div>
+          <div class="tier-price">$99-149<span>/mo</span></div>
+          <ul>
+            <li>Strength floor &amp; climbing wall</li>
+            <li>4 classes per month</li>
+            <li>Nutrition bar discount</li>
+          </ul>
+        </div>
+        <div class="tier featured">
+          <div class="tier-name">Immersion</div>
+          <div class="tier-price">$150-249<span>/mo</span></div>
+          <ul>
+            <li>Everything in Foundation</li>
+            <li>Unlimited contrast therapy</li>
+            <li>Unlimited classes</li>
+            <li>Library access</li>
+          </ul>
+        </div>
+        <div class="tier">
+          <div class="tier-name">All-Access</div>
+          <div class="tier-price">$250-350<span>/mo</span></div>
+          <ul>
+            <li>Everything in Immersion</li>
+            <li>Guest passes (2/mo)</li>
+            <li>Practitioner discounts</li>
+            <li>Studio &amp; priority booking</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 style="font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 0.5rem;">Revenue at Maturity (Year 3+)</h3>
+      <table class="revenue-table">
+        <thead>
+          <tr>
+            <th>Stream</th>
+            <th>Annual (Base)</th>
+            <th>% of Revenue</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Memberships (1,500 members)</td><td>$3.4M</td><td>62%</td></tr>
+          <tr><td>Day passes &amp; sessions</td><td>$480K</td><td>9%</td></tr>
+          <tr><td>Events &amp; space rental</td><td>$420K</td><td>8%</td></tr>
+          <tr><td>Practitioner services</td><td>$360K</td><td>7%</td></tr>
+          <tr><td>Nutrition bar</td><td>$350K</td><td>6%</td></tr>
+          <tr><td>Classes &amp; programs</td><td>$300K</td><td>5%</td></tr>
+          <tr><td><strong>Total (base)</strong></td><td><strong>$5.3M</strong></td><td><strong>100%</strong></td></tr>
+        </tbody>
+      </table>
+
+      <div class="stat-row">
+        <div class="stat">
+          <div class="number">30-40%</div>
+          <div class="desc">EBITDA margin (base)</div>
+        </div>
+        <div class="stat">
+          <div class="number">$1.6M+</div>
+          <div class="desc">Annual operating profit</div>
+        </div>
+        <div class="stat">
+          <div class="number">600-700</div>
+          <div class="desc">Break-even members</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARABLES -->
+  <section class="comparables">
+    <div class="container">
+      <div class="section-label">Market Validation</div>
+      <h2 class="section-title">Comparable concepts prove demand at every scale.</h2>
+      <div class="comp-grid">
+        <div class="comp-card">
+          <h4>Othership</h4>
+          <div class="comp-location">Toronto &middot; 5K sq ft</div>
+          <div class="comp-stat">~$21M run rate</div>
+          <div class="comp-detail">~$178/mo membership</div>
+        </div>
+        <div class="comp-card">
+          <h4>Sauna House</h4>
+          <div class="comp-location">Asheville &rarr; 9 locations</div>
+          <div class="comp-stat">Inc. 5000 #838</div>
+          <div class="comp-detail">$45-59/session</div>
+        </div>
+        <div class="comp-card">
+          <h4>Bathhouse</h4>
+          <div class="comp-location">Brooklyn &middot; 16K sq ft</div>
+          <div class="comp-stat">$5-8M est.</div>
+          <div class="comp-detail">$40-65 day pass</div>
+        </div>
+        <div class="comp-card">
+          <h4>Aire Ancient Baths</h4>
+          <div class="comp-location">NYC, Chicago &middot; 8-12K sq ft</div>
+          <div class="comp-stat">$5-10M est.</div>
+          <div class="comp-detail">$103-660/session</div>
+        </div>
+        <div class="comp-card">
+          <h4>BlakeSt.</h4>
+          <div class="comp-location">Bentonville (local) &middot; 21K sq ft</div>
+          <div class="comp-stat">$1-2M est.</div>
+          <div class="comp-detail">$155-255/mo + $1K init.</div>
+        </div>
+      </div>
+      <p style="font-size: 0.9375rem; color: var(--charcoal); margin-top: 2rem; line-height: 1.6;">Our $5.3M base projection is conservative. BlakeSt. and SALT Health prove Bentonville pays premium prices. No one integrates thermal wellness, movement, community, and content into a single destination. The gap is structural.</p>
+    </div>
+  </section>
+
+  <!-- DEVELOPMENT INVESTMENT -->
+  <section class="investment" id="investment">
+    <div class="container">
+      <div class="section-label">Development Investment</div>
+      <h2 class="section-title">Estimated project cost: $14-20M.</h2>
+      <table class="invest-table">
+        <thead>
+          <tr><th>Component</th><th>Estimate</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Adaptive reuse + new construction</td><td>$10-16M</td><td>30-40K sq ft at $300-450/sq ft. NWA costs 15-25% below coastal.</td></tr>
+          <tr><td>FF&E</td><td>$1-2M</td><td>Premium fitness, thermal infrastructure, kitchen equipment</td></tr>
+          <tr><td>Technology infrastructure</td><td>$200-400K</td><td>Climate control, media studio, wearable integration</td></tr>
+          <tr><td>Pre-opening costs</td><td>$300-500K</td><td>Staff, marketing launch, inventory</td></tr>
+          <tr><td><strong>Total</strong></td><td><strong>$14-20M</strong></td><td>Underground excavation scope is primary variable</td></tr>
+        </tbody>
+      </table>
+      <div class="callout" style="border-left-color: var(--cedar); background: rgba(184, 115, 51, 0.05); color: var(--charcoal);">
+        <strong>Phased approach:</strong> The underground Cave can be built in Phase 2 if Phase 1 (ground + upper + rooftop) proves demand. Each phase is independently viable.
+      </div>
+    </div>
+  </section>
+
+  <!-- RISK -->
+  <section class="risk">
+    <div class="container">
+      <div class="section-label">Risk Mitigation</div>
+      <h2 class="section-title">We've thought about what could go wrong.</h2>
+      <div class="risk-grid">
+        <div class="risk-item">
+          <div class="risk-label">Operator underperformance</div>
+          <div class="risk-mitigation">Long-term lease with personal guarantees. Building designed for multi-tenant wellness use. Core thermal/fitness infrastructure retains value.</div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-label">Slow membership ramp</div>
+          <div class="risk-mitigation">Break-even at 600-700 members (Year 1-2 achievable). Day passes and corporate events provide cash flow during ramp.</div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-label">Construction overrun</div>
+          <div class="risk-mitigation">Phased scope. Underground cave can be Phase 2. Each phase independently viable.</div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-label">Market timing</div>
+          <div class="risk-mitigation">Wellness gap exists now. Concept viable independent of Ice House timeline, but 2028 co-launch maximizes impact.</div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-label">Underground complexity</div>
+          <div class="risk-mitigation">Geotechnical assessment is Phase 1 due diligence. If unfavorable, thermal program redesigned as ground-level wing.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="team" id="team">
+    <div class="container">
+      <div class="section-label">The Team</div>
+      <h2 class="section-title">Four founders. Complementary expertise.</h2>
+      <div class="team-grid">
+        <div class="team-member">
+          <div class="team-avatar">JC</div>
+          <h4>Jordan Carlisle</h4>
+          <div class="role">Health Optimization & Media</div>
+          <div class="bio">CTO at Sober Sidekick. Cipher health coaching founder. Content strategy, technology systems.</div>
+        </div>
+        <div class="team-member">
+          <div class="team-avatar">KC</div>
+          <h4>Kathryn Carlisle</h4>
+          <div class="role">Movement & Experience</div>
+          <div class="bio">Movement practice, outdoor wellness, experience design, community building.</div>
+        </div>
+        <div class="team-member">
+          <div class="team-avatar">JT</div>
+          <h4>Justin Ternes</h4>
+          <div class="role">Holistic Health & Recovery</div>
+          <div class="bio">Health coaching, contrast therapy expertise, holistic wellness programming.</div>
+        </div>
+        <div class="team-member">
+          <div class="team-avatar">CA</div>
+          <h4>Chelsea Adair</h4>
+          <div class="role">Coaching & Community</div>
+          <div class="bio">Health coaching, community building, program design, group facilitation.</div>
+        </div>
+      </div>
+      <div class="advisors">
+        <h3>Addressing the Experience Gap</h3>
+        <p style="font-size: 0.875rem; color: var(--riverstone); margin-bottom: 1rem;">We are wellness and technology experts, not facility operators &mdash; and we know it.</p>
+        <ul>
+          <li>Hospitality operations advisor (in formation)</li>
+          <li>F&B consultant for nutrition bar operations</li>
+          <li>Experienced NWA commercial real estate counsel</li>
+          <li>Architect shortlist: Marlon Blackwell, Modus Studio, Olson Kundig</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="timeline">
+    <div class="container">
+      <div class="section-label">Timeline</div>
+      <h2 class="section-title" style="color: var(--warm-white)">Phased development aligned with Ice House 2028.</h2>
+      <div class="timeline-track">
+        <div class="phase">
+          <div class="phase-label">Phase 1</div>
+          <div class="phase-date">Q1 2026</div>
+          <div class="phase-desc">Developer LOI, site assessment, geotechnical study, architect selection</div>
+        </div>
+        <div class="phase">
+          <div class="phase-label">Phase 2</div>
+          <div class="phase-date">Q2-Q4 2026</div>
+          <div class="phase-desc">Concept design, construction docs, permitting, community engagement</div>
+        </div>
+        <div class="phase">
+          <div class="phase-label">Phase 3</div>
+          <div class="phase-date">2027</div>
+          <div class="phase-desc">Adaptive reuse + new construction, equipment, staff hiring</div>
+        </div>
+        <div class="phase">
+          <div class="phase-label">Phase 4</div>
+          <div class="phase-date">Early 2028</div>
+          <div class="phase-desc">Pre-opening membership drive, soft launch, grand opening</div>
+        </div>
+        <div class="phase">
+          <div class="phase-label">Phase 5</div>
+          <div class="phase-date">2028-2030</div>
+          <div class="phase-desc">Full programming, membership ramp to 1,500, content brand</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE ASK -->
+  <section class="ask" id="ask">
+    <div class="container">
+      <div class="section-label">The Ask</div>
+      <h2 class="section-title">We need a development partner &mdash; not a landlord.</h2>
+      <p style="font-size: 1.0625rem; color: var(--riverstone); max-width: 560px; margin: 0 auto;">A co-development partnership where our team operates and the developer acquires and builds.</p>
+
+      <div class="ask-grid">
+        <div class="ask-col">
+          <h4>We Bring</h4>
+          <ul>
+            <li>Fully developed concept</li>
+            <li>Operations team</li>
+            <li>Content engine</li>
+            <li>Community relationships</li>
+            <li>Revenue from day one</li>
+          </ul>
+        </div>
+        <div class="ask-col">
+          <h4>Partner Brings</h4>
+          <ul>
+            <li>Property acquisition</li>
+            <li>Construction financing</li>
+            <li>Zoning &amp; permitting</li>
+            <li>Construction management</li>
+            <li>Long-term investment horizon</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="next-steps">
+        <h3>Next Steps</h3>
+        <ol>
+          <li><strong>Site visit together</strong> &mdash; walk the block, see the Momentary adjacency, visualize the concept</li>
+          <li><strong>Geotechnical assessment</strong> &mdash; understand the underground potential</li>
+          <li><strong>Architect selection</strong> &mdash; partner on selecting a firm to realize the vision</li>
+          <li><strong>LOI and deal structure</strong> &mdash; define the co-development terms</li>
+        </ol>
+      </div>
+
+      <p class="closing">The market is ready. The site is ready.<br>Let's build the wellness anchor this district needs.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">KARST</div>
+    <p>407-409 SE F St &middot; Bentonville, AR &middot; SE Market District</p>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Active nav link
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => {
+            link.classList.toggle('active',
+              link.getAttribute('href') === '#' + entry.target.id
+            );
+          });
+        }
+      });
+    }, { threshold: 0.3, rootMargin: '-64px 0px -50% 0px' });
+
+    sections.forEach(section => observer.observe(section));
+
+    // Mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const navLinksEl = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      navLinksEl.classList.toggle('open');
+    });
+
+    navLinksEl.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinksEl.classList.remove('open');
+      });
+    });
+
+    // Scroll animations
+    const animateEls = document.querySelectorAll('.value-card, .level, .tier, .comp-card, .risk-item, .team-member, .phase');
+    const animObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    animateEls.forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      animObserver.observe(el);
+    });
+  </script>
+</body>
+</html>
