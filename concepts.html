@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KARST — Concept Inspiration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --charcoal: #2C2C2C;
+      --cedar: #B87333;
+      --limestone: #E8E0D4;
+      --riverstone: #9B958C;
+      --spring: #6B8F8E;
+      --warm-white: #FAF7F2;
+      --cave-dark: #1A1A1A;
+      --font-display: 'Instrument Serif', Georgia, serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--charcoal);
+      background: var(--warm-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection { background: var(--cedar); color: var(--warm-white); }
+
+    /* ========== HEADER ========== */
+    header {
+      padding: 2rem 2rem 0;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .back-link {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--riverstone);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover { color: var(--cedar); }
+
+    .page-header {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 2rem 1rem;
+    }
+
+    .page-header h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--charcoal);
+      margin-bottom: 1rem;
+    }
+
+    .page-header p {
+      font-size: 1.1rem;
+      color: var(--riverstone);
+      max-width: 640px;
+      line-height: 1.7;
+    }
+
+    /* ========== LEVEL SECTIONS ========== */
+    .level-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 2rem 1rem;
+    }
+
+    .level-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--cedar);
+      margin-bottom: 0.5rem;
+    }
+
+    .level-name {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 400;
+      color: var(--charcoal);
+      margin-bottom: 0.5rem;
+    }
+
+    .level-desc {
+      font-size: 0.95rem;
+      color: var(--riverstone);
+      margin-bottom: 1.5rem;
+      max-width: 640px;
+    }
+
+    .render-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .render-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .render-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .render-grid.cols-1 {
+      grid-template-columns: 1fr;
+      max-width: 900px;
+    }
+
+    @media (max-width: 768px) {
+      .render-grid.cols-3,
+      .render-grid.cols-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .render-card {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .render-card img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .render-card:hover img {
+      transform: scale(1.03);
+    }
+
+    .render-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2rem 1rem 1rem;
+      background: linear-gradient(transparent, rgba(0,0,0,0.6));
+      color: white;
+      font-size: 0.85rem;
+      font-weight: 500;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .render-card:hover .render-caption {
+      opacity: 1;
+    }
+
+    /* ========== DIVIDER ========== */
+    .divider {
+      max-width: 1200px;
+      margin: 2rem auto 0;
+      padding: 0 2rem;
+    }
+
+    .divider hr {
+      border: none;
+      border-top: 1px solid var(--limestone);
+    }
+
+    /* ========== LIGHTBOX ========== */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(26, 26, 26, 0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+
+    .lightbox.active { display: flex; }
+
+    .lightbox img {
+      max-width: 92vw;
+      max-height: 88vh;
+      object-fit: contain;
+      border-radius: 4px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.6);
+      background: none;
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .lightbox-close:hover {
+      color: white;
+      border-color: rgba(255,255,255,0.5);
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      text-align: center;
+      padding: 4rem 2rem 3rem;
+      color: var(--riverstone);
+      font-size: 0.85rem;
+    }
+
+    footer .footer-logo {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="back-link">&larr; Back to KARST</a>
+  </header>
+
+  <div class="page-header">
+    <h1>Concept Inspiration</h1>
+    <p>AI-generated architectural visualizations exploring what each space within KARST could feel like. These are directional — meant to capture mood, materiality, and atmosphere, not final design.</p>
+  </div>
+
+  <!-- EXTERIOR -->
+  <div class="divider"><hr></div>
+  <section class="level-section">
+    <div class="level-label">Arrival</div>
+    <h2 class="level-name">The Approach</h2>
+    <p class="level-desc">Ozark limestone and mass timber facade. Trail-connected. A building that grows from the landscape.</p>
+    <div class="render-grid cols-3">
+      <div class="render-card" onclick="openLightbox(this)">
+        <img src="renders/exterior-trail.jpg" alt="Building exterior from Greenway trail at golden hour" loading="lazy">
+        <div class="render-caption">Greenway trail approach &mdash; golden hour</div>
+      </div>
+      <div class="render-card" onclick="openLightbox(this)">
+        <img src="renders/exterior-courtyard.jpg" alt="Cyclist welcome zone and garden courtyard" loading="lazy">
+        <div class="render-caption">Cyclist welcome zone &mdash; garden courtyard</div>
+      </div>
+      <div class="render-card" onclick="openLightbox(this)">
+        <img src="renders/exterior-artcourt.jpg" alt="Art basketball court at blue hour" loading="lazy">
+        <div class="render-caption">Art court &mdash; blue hour</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE CAVE -->
+  <div class="divider"><hr></div>
+  <section class="level-section">
+    <div class="level-label">Underground</div>
+    <h2 class="level-name">The Cave</h2>
+    <p class="level-desc">Dim. Primal. Reverent. Rough-cut Ozark limestone, cedar, riverstone. No technology. The heart of the building.</p>
+    <div class="render-grid cols-3">
+      <div class="render-card" onclick="openLightbox(this)">
+        <img src="renders/cave-sauna.jpg" alt="Communal Aufguss sauna ceremony" loading="lazy">
+        <div class="render-caption">Communal sauna &mdash; Aufguss ceremony</div>
+      </div>
+      <div class="render-card" onclick="openLightbox(this)">
+        <img src="renders/cave-plunge.jpg" alt="Cold plunge stations" loading="lazy">
+        <div class="render-caption">Cold plunge stations</div>
+      </div>
+      <div class="render-card" onclick="openLightbox(this)">
+        <img src="renders/cave-soak.jpg" alt="Mineral soak pool" loading="lazy">
+        <div class="render-caption">Mineral soak pool</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE FOUNDATION -->
+  <div class="divider"><hr></div>
+  <section class="level-section">
+    <div class="level-label">Ground Level</div>
+    <h2 class="level-name">The Foundation</h2>
+    <p class="level-desc">Movement, training, nutrition. Mass timber and warehouse steel. Warm, architectural, premium.</p>
+    <div class="render-grid cols-3">
+      <div class="render-card" onclick="openLightbox(this)">
+        <img src="renders/foundation-gym.jpg" alt="EXOS-lite performance training floor" loading="lazy">
+        <div class="render-caption">Performance floor &mdash; EXOS-lite</div>
+      </div>
+      <div class="render-card" onclick="openLightbox(this)">
+        <img src="renders/foundation-boulder.jpg" alt="Bouldering feature wall" loading="lazy">
+        <div class="render-caption">Bouldering feature wall</div>
+      </div>
+      <div class="render-card" onclick="openLightbox(this)">
+        <img src="renders/foundation-hotyoga.jpg" alt="Hot yoga studio" loading="lazy">
+        <div class="render-caption">Hot yoga studio</div>
+      </div>
+    </div>
+    <div class="render-grid cols-2" style="margin-top: 1rem;">
+      <div class="render-card" onclick="openLightbox(this)">
+        <img src="renders/foundation-cafe-interior.jpg" alt="Cafe and bodega interior" loading="lazy">
+        <div class="render-caption">Cafe + bodega &mdash; interior</div>
+      </div>
+      <div class="render-card" onclick="openLightbox(this)">
+        <img src="renders/foundation-cafe-street.jpg" alt="Cafe storefront from street" loading="lazy">
+        <div class="render-caption">Cafe + bodega &mdash; street view</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE CANOPY -->
+  <div class="divider"><hr></div>
+  <section class="level-section">
+    <div class="level-label">Upper Level</div>
+    <h2 class="level-name">The Canopy</h2>
+    <p class="level-desc">Greenhouse light. Living walls. The intellectual layer &mdash; library, media, community.</p>
+    <div class="render-grid cols-2">
+      <div class="render-card" onclick="openLightbox(this)">
+        <img src="renders/canopy-library.jpg" alt="Signature library and sound lounge" loading="lazy">
+        <div class="render-caption">Signature library &mdash; sound lounge</div>
+      </div>
+      <div class="render-card" onclick="openLightbox(this)">
+        <img src="renders/canopy-media.jpg" alt="Content and media room" loading="lazy">
+        <div class="render-caption">Content &amp; media room</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE SKY -->
+  <div class="divider"><hr></div>
+  <section class="level-section">
+    <div class="level-label">Rooftop</div>
+    <h2 class="level-name">The Sky</h2>
+    <p class="level-desc">Open. Expansive. The culmination of the cave-to-sky journey. Ozark hills on the horizon.</p>
+    <div class="render-grid cols-2">
+      <div class="render-card" onclick="openLightbox(this)">
+        <img src="renders/sky-lounge.jpg" alt="Rooftop lounge with fire feature at blue hour" loading="lazy">
+        <div class="render-caption">Rooftop lounge &mdash; blue hour</div>
+      </div>
+      <div class="render-card" onclick="openLightbox(this)">
+        <img src="renders/sky-yoga.jpg" alt="Rooftop yoga at morning light" loading="lazy">
+        <div class="render-caption">Rooftop yoga &mdash; morning light</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">KARST</div>
+    <p>Concept visualizations &middot; Not final design</p>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close">ESC</button>
+    <img id="lightboxImg" src="" alt="">
+  </div>
+
+  <script>
+    function openLightbox(card) {
+      const img = card.querySelector('img');
+      const lb = document.getElementById('lightbox');
+      const lbImg = document.getElementById('lightboxImg');
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      lb.classList.add('active');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
+</body>
+</html>
