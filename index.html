@@ -719,6 +719,61 @@
     }
 
     /* ========== TEAM ========== */
+    /* ========== STORY ========== */
+    .story {
+      background: var(--charcoal);
+      color: var(--warm-white);
+      padding: 6rem 2rem;
+    }
+
+    .story .section-label { color: var(--cedar); }
+
+    .story-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+      margin-top: 2.5rem;
+    }
+
+    .story-video {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .story-video iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .story-text p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--limestone);
+      margin-bottom: 1.25rem;
+    }
+
+    .story-text p:first-child::first-line {
+      color: var(--warm-white);
+      font-weight: 500;
+    }
+
+    .story-text .story-accent {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1.375rem;
+      color: var(--cedar);
+      line-height: 1.5;
+      margin: 1.5rem 0;
+    }
+
     .team { padding: 6rem 2rem; }
 
     .team-grid {
@@ -1160,6 +1215,8 @@
 
       .team-grid { grid-template-columns: 1fr 1fr; }
 
+      .story-content { grid-template-columns: 1fr; }
+
       .timeline-track {
         grid-template-columns: 1fr;
         gap: 2rem;
@@ -1202,6 +1259,7 @@
         <li><a href="#experience">Experience</a></li>
         <li><a href="#model">Model</a></li>
         <li><a href="#investment">Investment</a></li>
+        <li><a href="#story">Story</a></li>
         <li><a href="#team">Team</a></li>
         <li><a href="#ask">The Ask</a></li>
         <li><a href="#documents">Documents</a></li>
@@ -1717,23 +1775,35 @@
   </section>
 
   <!-- TEAM -->
+  <!-- STORY -->
+  <section class="story" id="story">
+    <div class="container">
+      <div class="section-label">Our Story</div>
+      <h2 class="section-title" style="color: var(--warm-white);">Arkansas has always known the healing power of water and stone.</h2>
+      <div class="story-content">
+        <div class="story-video">
+          <iframe src="https://www.youtube.com/embed/VPx7iiRKf0I?start=5" title="The heritage of Bentonville's bathhouses" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="story-text">
+          <p>Long before Northwest Arkansas became a global destination for mountain biking, art, and innovation, this region was known for something more elemental. Arkansas earned the name "The Natural State" honestly &mdash; its landscape carved by ancient springs, mineral-rich waters, and limestone caverns that have drawn people seeking restoration for centuries.</p>
+          <p>Hot Springs built an entire city around the belief that the earth itself could heal you. Bathhouse Row became a national landmark &mdash; not because of marketing, but because people showed up, generation after generation, and felt the difference. Eureka Springs followed its own path, with cold mineral waters and Victorian bathhouses tucked into the Ozark hillside, attracting visitors from across the country who came to soak, breathe, and reset.</p>
+          <p class="story-accent">This is Arkansas's oldest tradition &mdash; not retail, not logistics, not corporate headquarters. Water. Stone. Restoration.</p>
+          <p>And Bentonville? It has its own chapter that most people have forgotten. In 1910, the Park Springs Sanitarium opened just north of downtown &mdash; a three-story facility set on 10 acres with four natural springs: Park, Kidney, Crystal, and Nelogany. Seventy-five guests at a time came to drink the mineral water, soak in therapeutic baths, and breathe in vapor treatments for restoration. It hosted Civil War reunions, live orchestras, and families who rode the railroad in from Rogers just to spend a week by the water. Park Springs was Bentonville's original gathering place &mdash; built around springs, not storefronts.</p>
+          <p>That history didn't survive the fires and the decades, but the springs are still there. The geology hasn't changed. The same limestone karst system that fed those four springs still runs beneath Bentonville, and the instinct that drew people to this land for healing never really left.</p>
+          <p>Bentonville has transformed in extraordinary ways over the last two decades. World-class trails, a museum that rivals anything on the coasts, restaurants that pull their weight nationally. But somewhere in the momentum, that older story got quiet &mdash; the one about a region where people came to slow down, not speed up.</p>
+          <p>KARST is Bentonville picking that story back up. Not borrowing someone else's playbook. Not importing a concept from L.A. or Scandinavia and dropping it into the Ozarks. This is a wellness destination that starts with what's already here &mdash; the karst geology, the cave springs, the limestone that defines this landscape &mdash; and builds something that belongs to this place and the people who love it.</p>
+          <p>For everyone who's watched Bentonville grow and wondered when it would build something that honored the deeper Arkansas tradition of healing and gathering &mdash; this is it. Ancient ground. Present moment. A place to remember what this region has always known.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
   <section class="team" id="team">
     <div class="container">
       <div class="section-label">The Team</div>
       <h2 class="section-title">Four founders. Complementary expertise.</h2>
       <div class="team-grid">
-        <div class="team-member">
-          <div class="team-avatar">JC</div>
-          <h4>Jordan Carlisle</h4>
-          <div class="role">Health Optimization & Media</div>
-          <div class="bio">CTO at Sober Sidekick. Cipher health coaching founder. Content strategy, technology systems.</div>
-        </div>
-        <div class="team-member">
-          <div class="team-avatar">KC</div>
-          <h4>Kathryn Carlisle</h4>
-          <div class="role">Movement & Experience</div>
-          <div class="bio">Movement practice, outdoor wellness, experience design, community building.</div>
-        </div>
         <div class="team-member">
           <div class="team-avatar">JT</div>
           <h4>Justin Ternes</h4>
@@ -1745,6 +1815,18 @@
           <h4>Chelsea Adair</h4>
           <div class="role">Coaching & Community</div>
           <div class="bio">Health coaching, community building, program design, group facilitation.</div>
+        </div>
+        <div class="team-member">
+          <div class="team-avatar">JC</div>
+          <h4>Jordan Carlisle</h4>
+          <div class="role">Health Optimization & Media</div>
+          <div class="bio">CTO at Sober Sidekick. Cipher health coaching founder. Content strategy, technology systems.</div>
+        </div>
+        <div class="team-member">
+          <div class="team-avatar">KC</div>
+          <h4>Kathryn Carlisle</h4>
+          <div class="role">Movement & Experience</div>
+          <div class="bio">Movement practice, outdoor wellness, experience design, community building.</div>
         </div>
       </div>
       <div class="advisors">
@@ -1930,7 +2012,7 @@
     });
 
     // Scroll animations
-    const animateEls = document.querySelectorAll('.value-card, .level, .tier, .comp-card, .risk-item, .team-member, .phase, .doc-card');
+    const animateEls = document.querySelectorAll('.value-card, .level, .tier, .comp-card, .risk-item, .team-member, .phase, .doc-card, .story-content');
     const animObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
