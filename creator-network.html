@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KARST — Creator Content Houses & Longevity Hubs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --charcoal: #2C2C2C;
+      --cedar: #B87333;
+      --limestone: #E8E0D4;
+      --riverstone: #9B958C;
+      --spring: #6B8F8E;
+      --warm-white: #FAF7F2;
+      --cave-dark: #1A1A1A;
+      --cave-mid: #222222;
+      --red-flag: #C0392B;
+      --green-ok: #4A7C59;
+      --font-display: 'Instrument Serif', Georgia, serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--charcoal);
+      background: var(--warm-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection { background: var(--cedar); color: var(--warm-white); }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(250, 247, 242, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(44, 44, 44, 0.08);
+      transition: box-shadow 0.3s ease;
+    }
+    nav.scrolled { box-shadow: 0 1px 20px rgba(0,0,0,0.06); }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .logo {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      color: var(--charcoal);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--riverstone);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--charcoal); }
+
+    /* HERO */
+    .hero {
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: var(--cave-dark);
+      color: var(--warm-white);
+      padding: 8rem 2rem 5rem;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 80%, rgba(184,115,51,0.08) 0%, transparent 60%);
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 820px; }
+    .hero-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--riverstone);
+      margin-bottom: 2rem;
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      color: var(--warm-white);
+    }
+    .hero h1 span { color: var(--cedar); }
+    .hero .subtitle {
+      font-size: 1.0625rem;
+      color: var(--limestone);
+      line-height: 1.75;
+      max-width: 640px;
+      margin: 0 auto 2.5rem;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat .val {
+      font-family: var(--font-mono);
+      font-size: 1.75rem;
+      font-weight: 500;
+      color: var(--cedar);
+      display: block;
+    }
+    .hero-stat .label {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--riverstone);
+      margin-top: 0.25rem;
+    }
+
+    /* COMMON */
+    section { padding: 5rem 2rem; }
+    .container { max-width: 1000px; margin: 0 auto; }
+    .container-narrow { max-width: 760px; margin: 0 auto; }
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--cedar);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .section-subtitle {
+      font-size: 1rem;
+      color: var(--riverstone);
+      max-width: 680px;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+    }
+    .divider {
+      width: 40px;
+      height: 1.5px;
+      background: var(--cedar);
+      margin: 3rem 0;
+    }
+    p.prose {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--charcoal);
+      margin-bottom: 1.25rem;
+    }
+    p.prose strong { font-weight: 600; }
+
+    /* DARK */
+    .dark { background: var(--charcoal); color: var(--warm-white); }
+    .dark .section-subtitle { color: var(--limestone); }
+    .dark .section-title { color: var(--warm-white); }
+    .dark p.prose { color: var(--limestone); }
+
+    .cave-section { background: var(--cave-dark); color: var(--warm-white); }
+    .cave-section .section-subtitle { color: var(--limestone); }
+    .cave-section .section-title { color: var(--warm-white); }
+
+    /* CALLOUT */
+    .callout {
+      padding: 1.5rem 1.75rem;
+      border-left: 3px solid var(--cedar);
+      background: rgba(232,224,212,0.35);
+      border-radius: 0 3px 3px 0;
+      margin: 2rem 0;
+    }
+    .callout .callout-title {
+      font-size: 0.8125rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      color: var(--cedar);
+    }
+    .callout p {
+      font-size: 0.9375rem;
+      line-height: 1.7;
+      color: var(--charcoal);
+    }
+    .callout p + p { margin-top: 0.6rem; }
+    .dark .callout { background: var(--cave-dark); border-color: var(--cedar); }
+    .dark .callout p { color: var(--limestone); }
+
+    /* TABS */
+    .tabs {
+      display: flex;
+      gap: 0;
+      margin-bottom: 3rem;
+      border-bottom: 2px solid var(--limestone);
+    }
+    .tab {
+      flex: 1;
+      padding: 1.25rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-family: var(--font-body);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--riverstone);
+      position: relative;
+      transition: color 0.2s, background 0.2s;
+    }
+    .tab:hover { color: var(--charcoal); background: rgba(232,224,212,0.3); }
+    .tab.active { color: var(--charcoal); }
+    .tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0; right: 0;
+      height: 2px;
+      background: var(--cedar);
+    }
+    .tab .tab-meta {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 400;
+      margin-top: 0.4rem;
+      color: var(--riverstone);
+      letter-spacing: 0.02em;
+      text-transform: none;
+    }
+    .tab.active .tab-meta { color: var(--cedar); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ARCHETYPE PANEL */
+    .archetype {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+    .archetype-lead h3 {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.01em;
+    }
+    .archetype-lead .tag-line {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cedar);
+      margin-bottom: 1.5rem;
+    }
+    .archetype-lead p {
+      font-size: 0.9375rem;
+      line-height: 1.75;
+      color: var(--charcoal);
+      margin-bottom: 1.25rem;
+    }
+    .archetype-facts {
+      list-style: none;
+      padding: 0;
+    }
+    .archetype-facts li {
+      font-size: 0.875rem;
+      line-height: 1.6;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(232,224,212,0.6);
+    }
+    .archetype-facts li:last-child { border-bottom: none; }
+    .archetype-facts li strong {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--riverstone);
+      margin-bottom: 0.3rem;
+    }
+
+    .archetype-panel-side {
+      background: rgba(232,224,212,0.3);
+      padding: 1.75rem;
+      border-radius: 3px;
+      border: 1px solid rgba(44,44,44,0.05);
+    }
+    .archetype-panel-side h4 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--cedar);
+      margin-bottom: 0.75rem;
+    }
+    .archetype-panel-side + .archetype-panel-side { margin-top: 1rem; }
+    .archetype-panel-side p {
+      font-size: 0.875rem;
+      line-height: 1.65;
+      color: var(--charcoal);
+    }
+
+    /* REVENUE BAR */
+    .revenue-chart {
+      margin: 2rem 0;
+    }
+    .revenue-row {
+      display: grid;
+      grid-template-columns: 200px 1fr 60px;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.8rem;
+    }
+    .revenue-label {
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-align: right;
+    }
+    .revenue-track {
+      height: 32px;
+      background: rgba(232,224,212,0.5);
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
+    }
+    .revenue-fill {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 0.8s ease;
+    }
+    .revenue-fill.primary { background: var(--cedar); }
+    .revenue-fill.secondary { background: var(--spring); }
+    .revenue-fill.tertiary { background: var(--charcoal); }
+    .revenue-fill.quaternary { background: var(--riverstone); }
+    .revenue-fill.quinary { background: var(--limestone); }
+    .revenue-value {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-align: right;
+    }
+    .revenue-note {
+      font-size: 0.8125rem;
+      color: var(--riverstone);
+      margin-left: calc(200px + 1rem);
+      margin-bottom: 0.75rem;
+      line-height: 1.5;
+    }
+
+    /* HUB COMPS */
+    .hub-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .hub-card {
+      padding: 1.75rem;
+      background: var(--cave-mid);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 3px;
+    }
+    .hub-card.featured {
+      border-color: var(--cedar);
+      background: linear-gradient(180deg, rgba(184,115,51,0.08) 0%, var(--cave-mid) 100%);
+    }
+    .hub-card .hub-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cedar);
+      margin-bottom: 0.5rem;
+    }
+    .hub-card h4 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--warm-white);
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+    .hub-card .hub-meta {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--limestone);
+      margin-bottom: 1rem;
+      line-height: 1.7;
+    }
+    .hub-card p {
+      font-size: 0.875rem;
+      line-height: 1.7;
+      color: var(--limestone);
+    }
+    .hub-card .karst-relevance {
+      margin-top: 1.25rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.8125rem;
+      color: var(--riverstone);
+      line-height: 1.65;
+    }
+    .hub-card .karst-relevance strong {
+      color: var(--cedar);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      display: block;
+      margin-bottom: 0.35rem;
+    }
+
+    /* COMP TABLE */
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.875rem;
+    }
+    .comp-table th {
+      text-align: left;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--riverstone);
+      padding: 0.85rem 1rem;
+      border-bottom: 2px solid var(--limestone);
+      background: rgba(232,224,212,0.3);
+    }
+    .comp-table td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid rgba(232,224,212,0.6);
+      vertical-align: top;
+      line-height: 1.55;
+    }
+    .comp-table td:first-child { font-weight: 600; }
+    .comp-table tr:last-child td { border-bottom: none; }
+    .comp-table tr.karst-row td {
+      background: rgba(184,115,51,0.06);
+      border-bottom-color: rgba(184,115,51,0.2);
+    }
+    .comp-table tr.karst-row td:first-child { color: var(--cedar); }
+    .table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 1.5rem 0;
+      border: 1px solid rgba(44,44,44,0.06);
+      border-radius: 3px;
+    }
+    .table-wrap table { margin: 0; }
+
+    /* IMPLICATIONS */
+    .impl-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin: 2rem 0;
+    }
+    .impl-card {
+      padding: 1.75rem 2rem;
+      background: white;
+      border: 1px solid rgba(44,44,44,0.08);
+      border-left: 3px solid var(--cedar);
+      border-radius: 0 3px 3px 0;
+    }
+    .impl-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.375rem;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.75rem;
+    }
+    .impl-card p {
+      font-size: 0.9375rem;
+      line-height: 1.75;
+      color: var(--charcoal);
+    }
+    .impl-card p + p { margin-top: 0.75rem; }
+    .impl-card .impl-level {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--spring);
+      margin-bottom: 0.35rem;
+    }
+
+    /* PARTNERSHIP TIERS */
+    .tiers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin: 2rem 0;
+    }
+    .tier {
+      padding: 1.5rem;
+      background: var(--warm-white);
+      border: 1px solid var(--limestone);
+      border-radius: 3px;
+    }
+    .tier .tier-num {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--cedar);
+      margin-bottom: 0.5rem;
+    }
+    .tier h4 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      line-height: 1.3;
+      margin-bottom: 0.75rem;
+    }
+    .tier p {
+      font-size: 0.875rem;
+      line-height: 1.65;
+      color: var(--charcoal);
+      margin-bottom: 0.75rem;
+    }
+    .tier .tier-commit {
+      font-size: 0.75rem;
+      color: var(--riverstone);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+    }
+
+    /* QUESTIONS */
+    .questions {
+      counter-reset: q;
+      list-style: none;
+      padding: 0;
+    }
+    .questions li {
+      counter-increment: q;
+      padding: 1.25rem 0 1.25rem 3rem;
+      border-bottom: 1px solid rgba(232,224,212,0.6);
+      position: relative;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+    .questions li::before {
+      content: counter(q, decimal-leading-zero);
+      position: absolute;
+      left: 0;
+      top: 1.25rem;
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      color: var(--cedar);
+      letter-spacing: 0.04em;
+    }
+    .questions li:last-child { border-bottom: none; }
+
+    /* FOOTER */
+    footer {
+      padding: 3rem 2rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--riverstone);
+      border-top: 1px solid rgba(44,44,44,0.06);
+    }
+    footer span { font-family: var(--font-mono); }
+    footer a {
+      color: var(--cedar);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    footer a:hover { border-bottom-color: var(--cedar); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      section { padding: 3.5rem 1.25rem; }
+      .hero { padding: 6rem 1.5rem 3.5rem; min-height: 50vh; }
+      .hero-stats { gap: 1.75rem; }
+      .archetype { grid-template-columns: 1fr; gap: 1.75rem; }
+      .hub-grid { grid-template-columns: 1fr; }
+      .tiers { grid-template-columns: 1fr; }
+      .tabs { flex-direction: column; border-bottom: none; }
+      .tab { border-bottom: 1px solid var(--limestone); text-align: left; padding: 1rem; }
+      .tab.active::after { bottom: -1px; }
+      .revenue-row { grid-template-columns: 120px 1fr 50px; gap: 0.5rem; }
+      .revenue-note { margin-left: calc(120px + 0.5rem); font-size: 0.75rem; }
+      .nav-links { display: none; }
+      .comp-table { font-size: 0.8rem; }
+      .comp-table th, .comp-table td { padding: 0.55rem 0.65rem; }
+    }
+
+    @media print {
+      nav { display: none; }
+      .hero { min-height: auto; padding: 3rem 2rem; }
+      section { padding: 2rem; }
+      .tab-panel { display: block !important; }
+      .tabs { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">KARST</a>
+    <ul class="nav-links">
+      <li><a href="#thesis">Thesis</a></li>
+      <li><a href="#shift">The Shift</a></li>
+      <li><a href="#archetypes">Archetypes</a></li>
+      <li><a href="#revenue">Revenue</a></li>
+      <li><a href="#hubs">Longevity Hubs</a></li>
+      <li><a href="#implications">Implications</a></li>
+      <li><a href="#questions">Questions</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-content">
+    <div class="hero-label">Strategic Brief &middot; Creator Economy</div>
+    <h1>The Network <span>We're Already In</span></h1>
+    <p class="subtitle">Evidence-based health media has moved past influencer houses. It now runs on a decentralized network of credentialed creators, corporate sponsors acting as proxy agencies, and a small set of physical Longevity Hubs. KARST sits in that third layer &mdash; whether we acknowledge it or not.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="val">$610B</span>
+        <span class="label">Longevity Market by 2026</span>
+      </div>
+      <div class="hero-stat">
+        <span class="val">4</span>
+        <span class="label">Creator Archetypes</span>
+      </div>
+      <div class="hero-stat">
+        <span class="val">25K sf</span>
+        <span class="label">Closest Physical Comp</span>
+      </div>
+      <div class="hero-stat">
+        <span class="val">200K</span>
+        <span class="label">Projected Visitors/Yr</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- THESIS -->
+<section id="thesis">
+  <div class="container-narrow">
+    <div class="section-label">Thesis</div>
+    <h2 class="section-title">Why this matters for KARST</h2>
+    <p class="prose">The evidence-based health creator economy &mdash; Huberman, Attia, Rhonda Patrick, Thomas DeLauer, and the tier below them &mdash; is no longer just a content category. It has become a decentralized network with three infrastructure layers:</p>
+    <p class="prose">
+      <strong>1.</strong> Academic and grassroots collectives (Harvard T.H. Chan Creator Program, The Evidence Collective) that supply scientific legitimacy.<br>
+      <strong>2.</strong> Corporate sponsors (Momentous, InsideTracker) that function as de facto talent agencies, vetting creators through clinical rigor rather than follower count.<br>
+      <strong>3.</strong> A small set of physical Longevity Hubs where the protocols these creators teach actually get practiced.
+    </p>
+    <div class="callout">
+      <div class="callout-title">The Position</div>
+      <p><strong>KARST is a Longevity Hub in that third layer.</strong> We are being built in the same category as Submersive (Austin), Clinique La Prairie's expansion hubs, and the neighborhood-scale bathhouses that have spun out of this creator economy.</p>
+      <p>The audience that already exists &mdash; millions of people reading protocol guides from these creators &mdash; is the audience looking for a place to actually do the thing. Most of them don't have one within driving distance.</p>
+      <p>The strategic question is not whether KARST is part of this network. It is: <em>what role do we want to play in it, and what does that mean for the Canopy media studio, our partnership framework, and our revenue model?</em></p>
+    </div>
+  </div>
+</section>
+
+<!-- THE SHIFT -->
+<section id="shift" class="dark">
+  <div class="container-narrow">
+    <div class="section-label">Market Shift</div>
+    <h2 class="section-title">From Influencer Houses to Decentralized Networks</h2>
+    <p class="prose">Traditional content houses (TikTok collectives, Fenty Beauty House, Hype House) depend on physical cohabitation and shared aesthetic for virality. That model is <strong>functionally dead</strong> in evidence-based health, because credentialed creators cannot risk reputational dilution by associating with unvetted peers.</p>
+    <p class="prose">What has replaced it is a decentralized network bound together by four mechanisms that produce the <em>effect</em> of a shared house without any shared address:</p>
+    <div class="callout">
+      <div class="callout-title">Four Binding Mechanisms</div>
+      <p><strong>Cross-pollination via podcasting.</strong> Attia guests on Huberman. Patrick guests on Attia. DeLauer references both. Audiences get exposed to the whole allied network.</p>
+      <p><strong>Shared corporate sponsors acting as proxy management.</strong> Momentous alone holds contracts with Huberman, Stacy Sims, Kelly Starrett, the US Department of Defense, and 175+ pro sports teams. That roster functions like a talent agency.</p>
+      <p><strong>Shared production infrastructure.</strong> Boutique agencies like Scicomm Media and DoubleUp produce the uniform "this looks like science" aesthetic across multiple creators.</p>
+      <p><strong>Shared physical endpoints.</strong> This is where KARST enters. The Longevity Hubs being built in Austin, Dubai, and elsewhere are where the content network resolves into lived experience.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHETYPES -->
+<section id="archetypes">
+  <div class="container">
+    <div class="section-label">Creator Business Models</div>
+    <h2 class="section-title">Four Archetypes &mdash; and What Each Means for Us</h2>
+    <p class="section-subtitle">There is no single model. Four distinct monetization strategies dominate the evidence-based health creator economy. Each implies a different relationship with KARST as a physical venue.</p>
+
+    <div class="tabs">
+      <button class="tab active" onclick="showTab('huberman')">
+        Mega-Sponsor Network
+        <span class="tab-meta">Huberman Lab</span>
+      </button>
+      <button class="tab" onclick="showTab('attia')">
+        Premium Subscription
+        <span class="tab-meta">Peter Attia</span>
+      </button>
+      <button class="tab" onclick="showTab('delauer')">
+        High-Volume Affiliate
+        <span class="tab-meta">Thomas DeLauer</span>
+      </button>
+      <button class="tab" onclick="showTab('momentous')">
+        Corporate Ecosystem
+        <span class="tab-meta">Momentous</span>
+      </button>
+    </div>
+
+    <!-- HUBERMAN -->
+    <div id="panel-huberman" class="tab-panel active">
+      <div class="archetype">
+        <div class="archetype-lead">
+          <h3>Mega-Sponsor Network</h3>
+          <div class="tag-line">Huberman Lab &middot; Scicomm Media</div>
+          <p>Free-to-consume broadcast at scale. Revenue from high-ticket integrated sponsorships (AG1, Eight Sleep, Momentous). Functions like a modern TV network, with academic credentials justifying premium CPMs.</p>
+          <ul class="archetype-facts">
+            <li><strong>Primary Engine</strong>Long-form YouTube and podcast</li>
+            <li><strong>Monetization</strong>Exclusive multi-million dollar sponsor contracts</li>
+            <li><strong>Revenue Mix</strong>~75% sponsors, ~20% premium/merch, ~5% AdSense</li>
+            <li><strong>Expansion Path</strong>Secondary properties, endorsed product lines</li>
+          </ul>
+        </div>
+        <div>
+          <div class="archetype-panel-side">
+            <h4>KARST Relevance</h4>
+            <p>This is the audience-acquisition top of the funnel. A creator at this tier visiting KARST, filming at the Canopy media studio, or running a protocol session in the Cave reaches more people in a weekend than we could reach in a year of direct marketing.</p>
+          </div>
+          <div class="archetype-panel-side">
+            <h4>Design Implication</h4>
+            <p>The Canopy media studio should be built to broadcast-grade spec: black backdrop, cinematic lighting, no wellness-cliche signifiers. Scicomm Media's visual language is the reference.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ATTIA -->
+    <div id="panel-attia" class="tab-panel">
+      <div class="archetype">
+        <div class="archetype-lead">
+          <h3>Premium Subscription</h3>
+          <div class="tag-line">Peter Attia &middot; Early Medical</div>
+          <p>Deliberately zero sponsorships to preserve clinical objectivity. Monetizes the top 1% of the audience willing to pay premium for deep technical translation, show notes, and AMAs. Smaller reach, exceptional LTV.</p>
+          <ul class="archetype-facts">
+            <li><strong>Primary Engine</strong>Deep-dive interviews, exhaustive written show notes</li>
+            <li><strong>Monetization</strong>Tiered subscriptions ($150&ndash;$2,000+/yr), books</li>
+            <li><strong>Revenue Mix</strong>~80% subscriptions, ~20% books and IP</li>
+            <li><strong>Expansion Path</strong>Digital courses, HNW protocol programs</li>
+          </ul>
+        </div>
+        <div>
+          <div class="archetype-panel-side">
+            <h4>KARST Relevance</h4>
+            <p>The archetype our membership model should study most closely. Attia's audience is already paying $150&ndash;$2,000/yr for an intangible subscription built on trust. A KARST membership delivers the tangible counterpart.</p>
+          </div>
+          <div class="archetype-panel-side">
+            <h4>Pricing Implication</h4>
+            <p>Our membership pricing should be anchored against this willingness-to-pay, <em>not</em> against local gym comps. The audience overlaps. The purchase is emotionally equivalent.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DELAUER -->
+    <div id="panel-delauer" class="tab-panel">
+      <div class="archetype">
+        <div class="archetype-lead">
+          <h3>High-Volume Affiliate</h3>
+          <div class="tag-line">Thomas DeLauer &middot; FoundMyFitness tactical tier</div>
+          <p>Shorter, high-frequency content focused on actionable tactics. Monetization comes from affiliate links and owned-brand products integrated into problem-solving narratives.</p>
+          <ul class="archetype-facts">
+            <li><strong>Primary Engine</strong>Short YouTube videos (10&ndash;20 min), high search volume</li>
+            <li><strong>Monetization</strong>Affiliate links, AdSense, own-brand coaching</li>
+            <li><strong>Revenue Mix</strong>~40% affiliates, ~40% sponsors/own brand, ~20% AdSense</li>
+            <li><strong>Expansion Path</strong>Proprietary D2C CPG products</li>
+          </ul>
+        </div>
+        <div>
+          <div class="archetype-panel-side">
+            <h4>KARST Relevance</h4>
+            <p>Less strategic as a hosting venue, but this tier drives <em>regional</em> traffic. DeLauer-style followers are the ones who will drive four hours to try a new facility once they see it.</p>
+          </div>
+          <div class="archetype-panel-side">
+            <h4>Channel Implication</h4>
+            <p>Treat as earned-media / pull-through, not a partnership tier. One tactical video endorsing KARST's protocols could pressure-test peak-day throughput by itself.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOMENTOUS -->
+    <div id="panel-momentous" class="tab-panel">
+      <div class="archetype">
+        <div class="archetype-lead">
+          <h3>Corporate Ecosystem Backing</h3>
+          <div class="tag-line">Momentous &middot; InsideTracker</div>
+          <p>Not a creator &mdash; but the most important archetype for KARST to understand. Momentous grew 1,000%+ post-merger with Amp Human. Functions simultaneously as a product manufacturer, research grant-maker, and talent collective. Funded Voice In Sport ($500K, 2025) and Collective X ($200K, 2026).</p>
+          <ul class="archetype-facts">
+            <li><strong>Structure</strong>Scientific advisory board + ambassador roster</li>
+            <li><strong>Creators on Roster</strong>Huberman, Sims, Starrett, + others</li>
+            <li><strong>Institutional Backing</strong>10 DoD contracts, 175+ pro sports teams</li>
+            <li><strong>What They Don't Have Yet</strong>A physical brand activation site</li>
+          </ul>
+        </div>
+        <div>
+          <div class="archetype-panel-side">
+            <h4>KARST Relevance</h4>
+            <p>There is a plausible version of KARST where a Momentous-equivalent brand becomes a foundational partner &mdash; supplying the Cave's supplement protocols, co-funding Canopy research programming, subsidizing membership for a demographic segment.</p>
+          </div>
+          <div class="archetype-panel-side">
+            <h4>The Unexplored Vector</h4>
+            <p>This is the most interesting unexplored revenue vector in our current model. Momentous does not yet have a physical analogue. Neither does InsideTracker. There is a clear opening.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVENUE -->
+<section id="revenue" class="dark">
+  <div class="container">
+    <div class="section-label">Aggregate Revenue Picture</div>
+    <h2 class="section-title">Where the Money Actually Is</h2>
+    <p class="section-subtitle">Revenue breakdown across the top tier of evidence-based health creators. Two trends matter most for KARST.</p>
+
+    <div class="revenue-chart">
+      <div class="revenue-row">
+        <div class="revenue-label" style="color: var(--limestone);">Direct Sponsorships</div>
+        <div class="revenue-track"><div class="revenue-fill primary" style="width: 90%;"></div></div>
+        <div class="revenue-value" style="color: var(--warm-white);">45%</div>
+      </div>
+      <div class="revenue-row">
+        <div class="revenue-label" style="color: var(--limestone);">Premium Subscriptions</div>
+        <div class="revenue-track"><div class="revenue-fill secondary" style="width: 50%;"></div></div>
+        <div class="revenue-value" style="color: var(--warm-white);">25%</div>
+      </div>
+      <div class="revenue-row">
+        <div class="revenue-label" style="color: var(--limestone);">Equity / Own Brand</div>
+        <div class="revenue-track"><div class="revenue-fill tertiary" style="width: 30%;"></div></div>
+        <div class="revenue-value" style="color: var(--warm-white);">15%</div>
+      </div>
+      <div class="revenue-row">
+        <div class="revenue-label" style="color: var(--limestone);">Affiliate Marketing</div>
+        <div class="revenue-track"><div class="revenue-fill quaternary" style="width: 20%;"></div></div>
+        <div class="revenue-value" style="color: var(--warm-white);">10%</div>
+      </div>
+      <div class="revenue-row">
+        <div class="revenue-label" style="color: var(--limestone);">Platform AdSense</div>
+        <div class="revenue-track"><div class="revenue-fill quinary" style="width: 10%;"></div></div>
+        <div class="revenue-value" style="color: var(--warm-white);">5%</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">Trend One &mdash; Subscriptions Eating Sponsorships</div>
+      <p>Creators increasingly want recurring revenue they control, not cash-for-ads deals. Supercast's top 10 health creators now gross $12M+ in annual subscription revenue alone. KARST membership is the physical analogue to this shift, and we should pitch it that way.</p>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">Trend Two &mdash; Equity Is How Top-Tier Creators Now Partner</div>
+      <p>When we approach a creator about a KARST partnership, the frame should not be "appearance fee + sponsored post." It should be "equity or revenue share in the facility." That aligns incentives over the 5&ndash;10 year horizon a KARST partnership needs to make sense.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LONGEVITY HUBS -->
+<section id="hubs" class="cave-section">
+  <div class="container">
+    <div class="section-label">The Physical Layer</div>
+    <h2 class="section-title">Longevity Hubs &mdash; The Category We're In</h2>
+    <p class="section-subtitle">As the longevity economy scales toward $610B by 2026, a new category of physical facility is emerging: capital-intensive, technologically equipped wellness destinations that serve as the in-person endpoint of the creator network. Not gyms. Not spas. Not clinics.</p>
+
+    <div class="hub-grid">
+      <div class="hub-card featured">
+        <div class="hub-label">Closest Comp</div>
+        <h4>Submersive</h4>
+        <div class="hub-meta">
+          25,000 sf &middot; Austin, TX &middot; Opening 2026<br>
+          $88 avg ticket &middot; 200K projected visitors/yr
+        </div>
+        <p>Immersive art bathhouse founded by Corvas Brinkerhoff (Meow Wolf co-founder). Partnered with Johns Hopkins' International Arts + Mind Lab for neuroaesthetics rigor. AI-driven sequencing through 12 rooms &mdash; thermal grottos, cold plunges, saltwater pools, astral projection installations. Plans for 11 additional global locations after Austin.</p>
+        <div class="karst-relevance">
+          <strong>KARST Read</strong>
+          Same square footage class (25K vs our ~20K). Same audience (evidence-based wellness). Same 2026 era. Different model: they are day-pass + art-experience; we are membership-first + cave-to-sky. Both can work in parallel markets. This belongs in our formal comps set and our unit economics should be pressure-tested against their 200K/year projection.
+        </div>
+      </div>
+
+      <div class="hub-card">
+        <div class="hub-label">Luxury Ceiling</div>
+        <h4>Clinique La Prairie Hubs</h4>
+        <div class="hub-meta">
+          Dubai (SIRO at One Za'abeel), Australia, China<br>
+          Elite HNW positioning
+        </div>
+        <p>Swiss medical spa expanding urban Longevity Hubs globally. Elite diagnostics + cellular rejuvenation + integrated fitness recovery. The luxury ceiling of this category &mdash; institutional capital flowing into physical longevity infrastructure at the highest price point.</p>
+        <div class="karst-relevance">
+          <strong>KARST Read</strong>
+          Not a direct comp &mdash; different geography, different price tier. But useful evidence in investor conversations that the category exists and is attracting institutional capital at scale.
+        </div>
+      </div>
+
+      <div class="hub-card">
+        <div class="hub-label">Macro Trend</div>
+        <h4>Urban Longevity Ecology</h4>
+        <div class="hub-meta">
+          RIOS &middot; Blue Zones-informed design<br>
+          Cross-generational communities
+        </div>
+        <p>Architecture firms designing developments informed by Blue Zones research &mdash; natural light, daily movement, sensory balance, community integration. The built environment itself is being restructured to support extended healthspans.</p>
+        <div class="karst-relevance">
+          <strong>KARST Read</strong>
+          Useful frame when we talk with Ramsey about embedding KARST in a larger mixed-use development. The category exists. We are not inventing it &mdash; we are joining it.
+        </div>
+      </div>
+
+      <div class="hub-card">
+        <div class="hub-label">Regional Precedents</div>
+        <h4>Neighborhood Bathhouses</h4>
+        <div class="hub-meta">
+          Othership (Toronto/NYC), Sauna House (Asheville)<br>
+          ~3,000&ndash;8,500 sf footprint
+        </div>
+        <p>Smaller-footprint precedents already validated. Othership built a cult community around breathwork + contrast; Sauna House expanded a franchise model across the Southeast. Both operate below the Longevity Hub tier but prove the demand.</p>
+        <div class="karst-relevance">
+          <strong>KARST Read</strong>
+          Floor of the category. KARST at 20K sf sits between these neighborhood operators and the full Longevity Hub scale &mdash; which is a defensible middle position.
+        </div>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Facility</th>
+            <th>Scale</th>
+            <th>Model</th>
+            <th>Audience</th>
+            <th>Positioning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Submersive (Austin)</td>
+            <td>25,000 sf</td>
+            <td>Day-pass, art-led</td>
+            <td>Biohacking-curious</td>
+            <td>Experience-first</td>
+          </tr>
+          <tr class="karst-row">
+            <td>KARST (Bentonville)</td>
+            <td>~20,000 sf</td>
+            <td>Membership + day-pass</td>
+            <td>Evidence-based wellness</td>
+            <td>Cave-to-sky narrative</td>
+          </tr>
+          <tr>
+            <td>Clinique La Prairie</td>
+            <td>Varies (luxury)</td>
+            <td>Medical-grade packages</td>
+            <td>HNW, institutional</td>
+            <td>Clinical ceiling</td>
+          </tr>
+          <tr>
+            <td>Othership</td>
+            <td>~4,000&ndash;6,000 sf</td>
+            <td>Class-based membership</td>
+            <td>Urban wellness</td>
+            <td>Community + breathwork</td>
+          </tr>
+          <tr>
+            <td>Sauna House</td>
+            <td>~6,700&ndash;8,500 sf</td>
+            <td>Hourly / membership</td>
+            <td>Regional Southeast</td>
+            <td>Accessible Nordic</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- IMPLICATIONS -->
+<section id="implications">
+  <div class="container">
+    <div class="section-label">What This Means For Us</div>
+    <h2 class="section-title">Five Tactical Implications</h2>
+    <p class="section-subtitle">Concrete decisions this analysis forces us to make &mdash; now, while space programming and capital structure are still open.</p>
+
+    <div class="impl-list">
+      <div class="impl-card">
+        <div class="impl-level">Implication 01 &middot; The Canopy</div>
+        <h3>The media studio is not an amenity. It's infrastructure.</h3>
+        <p>If we take the creator-network thesis seriously, the Canopy's media studio is the highest-leverage square footage in the building. It is where we earn audience.</p>
+        <p><strong>Spec implications:</strong> broadcast-grade audio isolation (not gym-adjacent); cinematic lighting and deep black backdrop; multi-camera setup for 2&ndash;4 hour long-form recording; private entrance so visiting creators don't walk through the member floor; green room that respects the practitioner's workflow.</p>
+      </div>
+
+      <div class="impl-card">
+        <div class="impl-level">Implication 02 &middot; Partnerships</div>
+        <h3>We need a three-tier creator partnership framework.</h3>
+        <p>Before we approach anyone, we should have a structured set of asks. Three tiers worth building out:</p>
+        <div class="tiers">
+          <div class="tier">
+            <div class="tier-num">TIER 01</div>
+            <h4>Drop-In Residency</h4>
+            <p>Traveling creator uses the media studio for a weekend. Films with local practitioners. Gets promotional footage.</p>
+            <div class="tier-commit">Low friction &middot; high volume</div>
+          </div>
+          <div class="tier">
+            <div class="tier-num">TIER 02</div>
+            <h4>Programming Partnership</h4>
+            <p>Creator runs a protocol series at KARST. Revenue share on programming. Their audience becomes our pipeline.</p>
+            <div class="tier-commit">Middle tier &middot; sustained</div>
+          </div>
+          <div class="tier">
+            <div class="tier-num">TIER 03</div>
+            <h4>Equity / Advisory</h4>
+            <p>One or two creators (or Momentous-tier brands) take equity as founding partners. Attia-model commitment.</p>
+            <div class="tier-commit">5&ndash;10 year horizon</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="impl-card">
+        <div class="impl-level">Implication 03 &middot; Pricing</div>
+        <h3>Anchor membership pricing against premium subscriptions, not local gyms.</h3>
+        <p>Attia's audience pays $150&ndash;$2,000/year for an audio subscription. Supercast's top health creators gross $12M+ combined on subscriptions alone. Our audience overlaps with theirs. KARST membership is the tangible version of that same purchase.</p>
+        <p>If we price against NWA gym comps we leave money on the table and mis-signal the category.</p>
+      </div>
+
+      <div class="impl-card">
+        <div class="impl-level">Implication 04 &middot; Corporate Partnership</div>
+        <h3>A Momentous-tier brand sponsorship is our largest unexplored revenue vector.</h3>
+        <p>Momentous does not yet have a physical brand activation site. Neither does InsideTracker. There is a clear opening for a KARST-style facility to become that site &mdash; supplement protocols in the Cave, diagnostic screening in the Foundation, programming grants in the Canopy.</p>
+        <p>This deserves a dedicated strategic conversation with Ramsey and the founding team before we finalize the supplement/apparel/retail strategy.</p>
+      </div>
+
+      <div class="impl-card">
+        <div class="impl-level">Implication 05 &middot; Cipher</div>
+        <h3>Cipher's role maps cleanly onto the "silent clinical partner" pattern.</h3>
+        <p>Johns Hopkins' International Arts + Mind Lab backs Submersive. The Harvard T.H. Chan Creator Program backs credentialed creators. Cipher provides KARST's protocol credibility without ever appearing as a co-brand.</p>
+        <p>This is the correct posture. It is consistent with our existing brand architecture and with what's working for other facilities in the category.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPEN QUESTIONS -->
+<section id="questions" class="dark">
+  <div class="container-narrow">
+    <div class="section-label">For Discussion</div>
+    <h2 class="section-title">Five Questions for the Team</h2>
+    <p class="section-subtitle">These are the decisions this analysis forces. Each has a cost if we defer it past space programming.</p>
+
+    <ol class="questions" style="color: var(--limestone);">
+      <li>Do we build the Canopy media studio to broadcast-grade spec from day one (higher capex, opens Tier 1 partnerships immediately) or retrofit later?</li>
+      <li>Who on the KARST team owns creator partnerships? This is a distinct skill set from member operations and we don't have a named owner yet.</li>
+      <li>Does Submersive's projected 200K-visitor/year throughput change how we think about day-pass vs. membership balance in year one?</li>
+      <li>Is there a Momentous-tier brand we should be in conversation with <em>before</em> we finalize the supplement / apparel / retail strategy?</li>
+      <li>What is the equity structure that would make a top-tier creator partnership make sense for both sides?</li>
+    </ol>
+
+    <div class="callout" style="margin-top: 3rem;">
+      <div class="callout-title">Recommended Next Step</div>
+      <p>Add Submersive to <span style="font-family: var(--font-mono); font-size: 0.85em;">research/comparable-concepts-research.md</span> as our closest physical comp, and pressure-test our Year 1 and Year 3 projections against their 200K-visitor throughput. Separately, identify one Momentous-tier brand to open a partnership conversation with before Ramsey follow-up.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><span>KARST</span> &mdash; Creator Content Houses &amp; Longevity Hubs</p>
+  <p style="margin-top: 0.5rem;">Strategic brief for internal team use &middot; Drawn from external market analysis of evidence-based health media networks (2026)</p>
+  <p style="margin-top: 0.25rem;">Source research on file in the karst repo at <span style="font-family: var(--font-mono); font-size: 0.9em;">research/creator-content-houses.md</span></p>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  function showTab(id) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('panel-' + id).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+</script>
+
+</body>
+</html>
