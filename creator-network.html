@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KARST — Creator Content Houses & Longevity Hubs</title>
+  <title>KARST — The Network Node</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -85,7 +85,7 @@
 
     /* HERO */
     .hero {
-      min-height: 60vh;
+      min-height: 62vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -102,7 +102,7 @@
       inset: 0;
       background: radial-gradient(ellipse at 50% 80%, rgba(184,115,51,0.08) 0%, transparent 60%);
     }
-    .hero-content { position: relative; z-index: 2; max-width: 820px; }
+    .hero-content { position: relative; z-index: 2; max-width: 840px; }
     .hero-label {
       font-family: var(--font-mono);
       font-size: 11px;
@@ -125,7 +125,7 @@
       font-size: 1.0625rem;
       color: var(--limestone);
       line-height: 1.75;
-      max-width: 640px;
+      max-width: 680px;
       margin: 0 auto 2.5rem;
     }
     .hero-stats {
@@ -342,9 +342,7 @@
     }
 
     /* REVENUE BAR */
-    .revenue-chart {
-      margin: 2rem 0;
-    }
+    .revenue-chart { margin: 2rem 0; }
     .revenue-row {
       display: grid;
       grid-template-columns: 200px 1fr 60px;
@@ -380,74 +378,65 @@
       font-weight: 500;
       text-align: right;
     }
-    .revenue-note {
-      font-size: 0.8125rem;
-      color: var(--riverstone);
-      margin-left: calc(200px + 1rem);
-      margin-bottom: 0.75rem;
-      line-height: 1.5;
-    }
 
-    /* HUB COMPS */
-    .hub-grid {
+    /* NETWORK NODE DIAGRAM */
+    .node-diagram {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      margin: 2rem 0;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 2rem;
+      align-items: center;
+      margin: 3rem 0;
     }
-    .hub-card {
-      padding: 1.75rem;
-      background: var(--cave-mid);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 3px;
+    .node-cluster {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
     }
-    .hub-card.featured {
-      border-color: var(--cedar);
-      background: linear-gradient(180deg, rgba(184,115,51,0.08) 0%, var(--cave-mid) 100%);
-    }
-    .hub-card .hub-label {
+    .node-cluster.right { align-items: flex-start; }
+    .node-cluster.left { align-items: flex-end; }
+    .node-label {
       font-family: var(--font-mono);
       font-size: 10px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--cedar);
+      color: var(--riverstone);
       margin-bottom: 0.5rem;
     }
-    .hub-card h4 {
+    .node-item {
+      padding: 0.65rem 1rem;
+      background: var(--cave-mid);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 3px;
+      font-size: 0.8125rem;
+      color: var(--limestone);
+      min-width: 180px;
+    }
+    .node-item.highlight {
+      border-color: var(--cedar);
+      background: rgba(184,115,51,0.1);
+    }
+    .node-center {
+      padding: 2rem;
+      background: linear-gradient(135deg, var(--cedar) 0%, #9a5f28 100%);
+      border-radius: 4px;
+      text-align: center;
+      color: var(--cave-dark);
+      min-width: 180px;
+      box-shadow: 0 10px 40px rgba(184,115,51,0.3);
+    }
+    .node-center .node-center-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.8;
+      margin-bottom: 0.5rem;
+    }
+    .node-center .node-center-title {
       font-family: var(--font-display);
       font-size: 1.5rem;
-      color: var(--warm-white);
-      margin-bottom: 0.75rem;
       letter-spacing: -0.01em;
-    }
-    .hub-card .hub-meta {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--limestone);
-      margin-bottom: 1rem;
-      line-height: 1.7;
-    }
-    .hub-card p {
-      font-size: 0.875rem;
-      line-height: 1.7;
-      color: var(--limestone);
-    }
-    .hub-card .karst-relevance {
-      margin-top: 1.25rem;
-      padding-top: 1.25rem;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      font-size: 0.8125rem;
-      color: var(--riverstone);
-      line-height: 1.65;
-    }
-    .hub-card .karst-relevance strong {
-      color: var(--cedar);
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      font-size: 0.7rem;
-      display: block;
-      margin-bottom: 0.35rem;
+      line-height: 1.2;
     }
 
     /* COMP TABLE */
@@ -526,7 +515,7 @@
       margin-bottom: 0.35rem;
     }
 
-    /* PARTNERSHIP TIERS */
+    /* TIERS */
     .tiers {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -601,13 +590,6 @@
       border-top: 1px solid rgba(44,44,44,0.06);
     }
     footer span { font-family: var(--font-mono); }
-    footer a {
-      color: var(--cedar);
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.2s;
-    }
-    footer a:hover { border-bottom-color: var(--cedar); }
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
@@ -615,13 +597,13 @@
       .hero { padding: 6rem 1.5rem 3.5rem; min-height: 50vh; }
       .hero-stats { gap: 1.75rem; }
       .archetype { grid-template-columns: 1fr; gap: 1.75rem; }
-      .hub-grid { grid-template-columns: 1fr; }
       .tiers { grid-template-columns: 1fr; }
       .tabs { flex-direction: column; border-bottom: none; }
       .tab { border-bottom: 1px solid var(--limestone); text-align: left; padding: 1rem; }
       .tab.active::after { bottom: -1px; }
       .revenue-row { grid-template-columns: 120px 1fr 50px; gap: 0.5rem; }
-      .revenue-note { margin-left: calc(120px + 0.5rem); font-size: 0.75rem; }
+      .node-diagram { grid-template-columns: 1fr; gap: 1.25rem; }
+      .node-cluster.right, .node-cluster.left { align-items: center; }
       .nav-links { display: none; }
       .comp-table { font-size: 0.8rem; }
       .comp-table th, .comp-table td { padding: 0.55rem 0.65rem; }
@@ -647,7 +629,7 @@
       <li><a href="#shift">The Shift</a></li>
       <li><a href="#archetypes">Archetypes</a></li>
       <li><a href="#revenue">Revenue</a></li>
-      <li><a href="#hubs">Longevity Hubs</a></li>
+      <li><a href="#node">Network Node</a></li>
       <li><a href="#implications">Implications</a></li>
       <li><a href="#questions">Questions</a></li>
     </ul>
@@ -657,25 +639,25 @@
 <!-- HERO -->
 <header class="hero">
   <div class="hero-content">
-    <div class="hero-label">Strategic Brief &middot; Creator Economy</div>
-    <h1>The Network <span>We're Already In</span></h1>
-    <p class="subtitle">Evidence-based health media has moved past influencer houses. It now runs on a decentralized network of credentialed creators, corporate sponsors acting as proxy agencies, and a small set of physical Longevity Hubs. KARST sits in that third layer &mdash; whether we acknowledge it or not.</p>
+    <div class="hero-label">Strategic Brief &middot; For the KARST Team</div>
+    <h1>KARST is a <span>Network Node</span></h1>
+    <p class="subtitle">Evidence-based health content is built on reputation and trust networks, not institutional credentials. The creators who define this space come to wherever their audience, their brand partners, and their peers already are. KARST's job is to be that place &mdash; a production destination plugged into the Bentonville CPG ecosystem.</p>
     <div class="hero-stats">
       <div class="hero-stat">
-        <span class="val">$610B</span>
-        <span class="label">Longevity Market by 2026</span>
+        <span class="val">8,400</span>
+        <span class="label">SF Programmatic</span>
+      </div>
+      <div class="hero-stat">
+        <span class="val">2,000</span>
+        <span class="label">SF Canopy (Production)</span>
+      </div>
+      <div class="hero-stat">
+        <span class="val">0.5 mi</span>
+        <span class="label">to Walmart HQ</span>
       </div>
       <div class="hero-stat">
         <span class="val">4</span>
         <span class="label">Creator Archetypes</span>
-      </div>
-      <div class="hero-stat">
-        <span class="val">25K sf</span>
-        <span class="label">Closest Physical Comp</span>
-      </div>
-      <div class="hero-stat">
-        <span class="val">200K</span>
-        <span class="label">Projected Visitors/Yr</span>
       </div>
     </div>
   </div>
@@ -686,17 +668,14 @@
   <div class="container-narrow">
     <div class="section-label">Thesis</div>
     <h2 class="section-title">Why this matters for KARST</h2>
-    <p class="prose">The evidence-based health creator economy &mdash; Huberman, Attia, Rhonda Patrick, Thomas DeLauer, and the tier below them &mdash; is no longer just a content category. It has become a decentralized network with three infrastructure layers:</p>
-    <p class="prose">
-      <strong>1.</strong> Academic and grassroots collectives (Harvard T.H. Chan Creator Program, The Evidence Collective) that supply scientific legitimacy.<br>
-      <strong>2.</strong> Corporate sponsors (Momentous, InsideTracker) that function as de facto talent agencies, vetting creators through clinical rigor rather than follower count.<br>
-      <strong>3.</strong> A small set of physical Longevity Hubs where the protocols these creators teach actually get practiced.
-    </p>
+    <p class="prose">The evidence-based health creator economy is not organized around institutions. It is organized around <strong>people with audiences</strong> &mdash; some credentialed, most not &mdash; and the CPG brands that fund their work. Trust flows through reputation, personal affiliation, and cross-guest appearances. A creator's authority comes from who they are <em>platformed by</em> and <em>associated with</em>, not from where they work.</p>
+    <p class="prose">Chris Williamson and Steven Bartlett (<em>Diary of a CEO</em>) have no medical or research background. They host the most respected health experts in the world. That is a reputation network, not a credentialing network.</p>
+    <p class="prose">KARST's role in this network is specific and defensible:</p>
     <div class="callout">
       <div class="callout-title">The Position</div>
-      <p><strong>KARST is a Longevity Hub in that third layer.</strong> We are being built in the same category as Submersive (Austin), Clinique La Prairie's expansion hubs, and the neighborhood-scale bathhouses that have spun out of this creator economy.</p>
-      <p>The audience that already exists &mdash; millions of people reading protocol guides from these creators &mdash; is the audience looking for a place to actually do the thing. Most of them don't have one within driving distance.</p>
-      <p>The strategic question is not whether KARST is part of this network. It is: <em>what role do we want to play in it, and what does that mean for the Canopy media studio, our partnership framework, and our revenue model?</em></p>
+      <p><strong>KARST is the physical production destination for creators whose brand partners are already in Bentonville.</strong></p>
+      <p>The reason people like Huberman, Paul Saladino, Bryan Johnson, Jeff Nippard, Rhonda Patrick, Chris Williamson, or <em>Diary of a CEO</em> fly to Bentonville is not the sauna. It is that the CPG brands they sell with &mdash; supplements, recovery tech, wearables, apparel &mdash; centralize here to service Walmart. Creators come for the buyer meetings. They stay to film. KARST is where they film.</p>
+      <p>The strategic question is not whether we build a great facility. It is: <em>how do we make KARST the default production stop for the creator economy passing through Bentonville?</em></p>
     </div>
   </div>
 </section>
@@ -704,16 +683,25 @@
 <!-- THE SHIFT -->
 <section id="shift" class="dark">
   <div class="container-narrow">
-    <div class="section-label">Market Shift</div>
-    <h2 class="section-title">From Influencer Houses to Decentralized Networks</h2>
-    <p class="prose">Traditional content houses (TikTok collectives, Fenty Beauty House, Hype House) depend on physical cohabitation and shared aesthetic for virality. That model is <strong>functionally dead</strong> in evidence-based health, because credentialed creators cannot risk reputational dilution by associating with unvetted peers.</p>
-    <p class="prose">What has replaced it is a decentralized network bound together by four mechanisms that produce the <em>effect</em> of a shared house without any shared address:</p>
+    <div class="section-label">What Has Changed</div>
+    <h2 class="section-title">Reputation replaced credentials</h2>
+    <p class="prose">A decade ago, health media meant credentialed people on credentialed platforms. Today, the largest audiences go to creators whose authority is built through reputation loops: guest appearances on each other's shows, shared brand partners, recognizable production spaces, and direct relationships with their audience.</p>
+    <p class="prose">Four mechanisms bind this network together. Each has a physical implication for KARST.</p>
     <div class="callout">
-      <div class="callout-title">Four Binding Mechanisms</div>
-      <p><strong>Cross-pollination via podcasting.</strong> Attia guests on Huberman. Patrick guests on Attia. DeLauer references both. Audiences get exposed to the whole allied network.</p>
-      <p><strong>Shared corporate sponsors acting as proxy management.</strong> Momentous alone holds contracts with Huberman, Stacy Sims, Kelly Starrett, the US Department of Defense, and 175+ pro sports teams. That roster functions like a talent agency.</p>
-      <p><strong>Shared production infrastructure.</strong> Boutique agencies like Scicomm Media and DoubleUp produce the uniform "this looks like science" aesthetic across multiple creators.</p>
-      <p><strong>Shared physical endpoints.</strong> This is where KARST enters. The Longevity Hubs being built in Austin, Dubai, and elsewhere are where the content network resolves into lived experience.</p>
+      <div class="callout-title">Cross-Guest Appearances</div>
+      <p>Attia guests on Huberman. Saladino on Rogan. Williamson hosts Nippard, Huberman, and Saladino across the same month. Audiences are trained to see the whole network as allied. A creator visible at KARST is visible to <em>all</em> of them by association.</p>
+    </div>
+    <div class="callout">
+      <div class="callout-title">Shared Brand Partners</div>
+      <p>Momentous, AG1, LMNT, Eight Sleep, Whoop &mdash; the same CPG brands sponsor multiple creators across the network. These brands are the scaffolding. Their buyer meetings happen in Bentonville. The creators follow.</p>
+    </div>
+    <div class="callout">
+      <div class="callout-title">Recognizable Production Spaces</div>
+      <p>When a venue appears across many creators' content, it becomes a brand in itself. The same black-backdrop studio, the same rooftop, the same recovery room showing up across channels compounds the venue's authority. KARST can be that recognizable space for the evidence-based health category.</p>
+    </div>
+    <div class="callout">
+      <div class="callout-title">Consumer-Direct Distribution</div>
+      <p>None of this touches a traditional network, publisher, or institution. Audience is owned through YouTube, Spotify, Substack, and email. Products sell through D2C plus retail (Walmart being the biggest prize). The whole ecosystem is consumer-centric.</p>
     </div>
   </div>
 </section>
@@ -721,132 +709,132 @@
 <!-- ARCHETYPES -->
 <section id="archetypes">
   <div class="container">
-    <div class="section-label">Creator Business Models</div>
-    <h2 class="section-title">Four Archetypes &mdash; and What Each Means for Us</h2>
-    <p class="section-subtitle">There is no single model. Four distinct monetization strategies dominate the evidence-based health creator economy. Each implies a different relationship with KARST as a physical venue.</p>
+    <div class="section-label">Creator Archetypes</div>
+    <h2 class="section-title">Four Types of Creator &mdash; and Why Each Comes to KARST</h2>
+    <p class="section-subtitle">There is no single model in evidence-based health media. Four distinct archetypes exist today, each with a different motivation to show up at a place like KARST. Designing for all four is how we maximize network density.</p>
 
     <div class="tabs">
-      <button class="tab active" onclick="showTab('huberman')">
-        Mega-Sponsor Network
-        <span class="tab-meta">Huberman Lab</span>
+      <button class="tab active" onclick="showTab('credentialed')">
+        Credentialed Host
+        <span class="tab-meta">Huberman &middot; Attia &middot; Patrick</span>
       </button>
-      <button class="tab" onclick="showTab('attia')">
-        Premium Subscription
-        <span class="tab-meta">Peter Attia</span>
+      <button class="tab" onclick="showTab('platformer')">
+        Non-Credentialed Platformer
+        <span class="tab-meta">Williamson &middot; Bartlett</span>
       </button>
-      <button class="tab" onclick="showTab('delauer')">
-        High-Volume Affiliate
-        <span class="tab-meta">Thomas DeLauer</span>
+      <button class="tab" onclick="showTab('creator-brand')">
+        Creator-as-Brand
+        <span class="tab-meta">Saladino &middot; Johnson &middot; Nippard</span>
       </button>
-      <button class="tab" onclick="showTab('momentous')">
-        Corporate Ecosystem
-        <span class="tab-meta">Momentous</span>
+      <button class="tab" onclick="showTab('brand-producer')">
+        Brand-Side Producer
+        <span class="tab-meta">Momentous &middot; AG1 &middot; LMNT</span>
       </button>
     </div>
 
-    <!-- HUBERMAN -->
-    <div id="panel-huberman" class="tab-panel active">
+    <!-- CREDENTIALED HOST -->
+    <div id="panel-credentialed" class="tab-panel active">
       <div class="archetype">
         <div class="archetype-lead">
-          <h3>Mega-Sponsor Network</h3>
-          <div class="tag-line">Huberman Lab &middot; Scicomm Media</div>
-          <p>Free-to-consume broadcast at scale. Revenue from high-ticket integrated sponsorships (AG1, Eight Sleep, Momentous). Functions like a modern TV network, with academic credentials justifying premium CPMs.</p>
+          <h3>Credentialed Host</h3>
+          <div class="tag-line">Andrew Huberman &middot; Peter Attia &middot; Rhonda Patrick</div>
+          <p>PhD / MD credentials are real but secondary to their platform reach. They run integrated sponsor networks (Huberman Lab), premium subscription models (Attia's Early Medical), or hybrid membership communities (FoundMyFitness). The credential is a legitimacy signal, not the distribution mechanism.</p>
           <ul class="archetype-facts">
-            <li><strong>Primary Engine</strong>Long-form YouTube and podcast</li>
-            <li><strong>Monetization</strong>Exclusive multi-million dollar sponsor contracts</li>
-            <li><strong>Revenue Mix</strong>~75% sponsors, ~20% premium/merch, ~5% AdSense</li>
-            <li><strong>Expansion Path</strong>Secondary properties, endorsed product lines</li>
+            <li><strong>Audience</strong>Millions, affluent, highly optimization-focused</li>
+            <li><strong>Monetization</strong>Host-read sponsorships, subscriptions, books, equity in CPG partners</li>
+            <li><strong>Production Need</strong>Broadcast-quality studio, long-form capability, recovery modalities on-site</li>
+            <li><strong>Typical Brand Stack</strong>AG1, Momentous, Eight Sleep, LMNT, Function Health</li>
           </ul>
         </div>
         <div>
           <div class="archetype-panel-side">
-            <h4>KARST Relevance</h4>
-            <p>This is the audience-acquisition top of the funnel. A creator at this tier visiting KARST, filming at the Canopy media studio, or running a protocol session in the Cave reaches more people in a weekend than we could reach in a year of direct marketing.</p>
+            <h4>Why They Come to KARST</h4>
+            <p>To film a multi-day shoot that combines practicing the protocols (sauna, cold plunge, training) with a long-form interview and brand-partner B-roll. Bentonville's CPG concentration means their sponsors can be in the room.</p>
           </div>
           <div class="archetype-panel-side">
-            <h4>Design Implication</h4>
-            <p>The Canopy media studio should be built to broadcast-grade spec: black backdrop, cinematic lighting, no wellness-cliche signifiers. Scicomm Media's visual language is the reference.</p>
+            <h4>What We Must Provide</h4>
+            <p>Broadcast-grade audio and lighting in the Canopy. Private access that doesn't route them through the member floor. A credible recovery backdrop for the protocol footage.</p>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ATTIA -->
-    <div id="panel-attia" class="tab-panel">
+    <!-- PLATFORMER -->
+    <div id="panel-platformer" class="tab-panel">
       <div class="archetype">
         <div class="archetype-lead">
-          <h3>Premium Subscription</h3>
-          <div class="tag-line">Peter Attia &middot; Early Medical</div>
-          <p>Deliberately zero sponsorships to preserve clinical objectivity. Monetizes the top 1% of the audience willing to pay premium for deep technical translation, show notes, and AMAs. Smaller reach, exceptional LTV.</p>
+          <h3>Non-Credentialed Platformer</h3>
+          <div class="tag-line">Chris Williamson (Modern Wisdom) &middot; Steven Bartlett (Diary of a CEO)</div>
+          <p>No medical or research background. Their authority is purely reputational &mdash; they've earned trust by booking and hosting the right guests, producing at a high level, and building parasocial relationships with their audience. They are arguably more influential than most credentialed creators because they are the distribution layer the credentialed ones use.</p>
           <ul class="archetype-facts">
-            <li><strong>Primary Engine</strong>Deep-dive interviews, exhaustive written show notes</li>
-            <li><strong>Monetization</strong>Tiered subscriptions ($150&ndash;$2,000+/yr), books</li>
-            <li><strong>Revenue Mix</strong>~80% subscriptions, ~20% books and IP</li>
-            <li><strong>Expansion Path</strong>Digital courses, HNW protocol programs</li>
+            <li><strong>Audience</strong>Millions, cross-demographic, strong male 25&ndash;45 skew</li>
+            <li><strong>Monetization</strong>Sponsor-driven, book deals, paid communities, event tours</li>
+            <li><strong>Production Need</strong>Cinematic backdrops, atmospheric lighting, on-location authenticity</li>
+            <li><strong>Typical Brand Stack</strong>Shopify, AG1, Element, Whoop, Huel, Function Health</li>
           </ul>
         </div>
         <div>
           <div class="archetype-panel-side">
-            <h4>KARST Relevance</h4>
-            <p>The archetype our membership model should study most closely. Attia's audience is already paying $150&ndash;$2,000/yr for an intangible subscription built on trust. A KARST membership delivers the tangible counterpart.</p>
+            <h4>Why They Come to KARST</h4>
+            <p>To film a location episode. Their format thrives on backdrops that signal "serious wellness operator" without being clinical. A cave-to-sky build in the Ozarks is a strong visual. And their guests are already traveling through Bentonville.</p>
           </div>
           <div class="archetype-panel-side">
-            <h4>Pricing Implication</h4>
-            <p>Our membership pricing should be anchored against this willingness-to-pay, <em>not</em> against local gym comps. The audience overlaps. The purchase is emotionally equivalent.</p>
+            <h4>What We Must Provide</h4>
+            <p>Visual story: the Cave, the rooftop Ozark view, the architectural moments. A Canopy production space that can also host a small in-person audience. Fast turnaround for drop-in shoots.</p>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- DELAUER -->
-    <div id="panel-delauer" class="tab-panel">
+    <!-- CREATOR AS BRAND -->
+    <div id="panel-creator-brand" class="tab-panel">
       <div class="archetype">
         <div class="archetype-lead">
-          <h3>High-Volume Affiliate</h3>
-          <div class="tag-line">Thomas DeLauer &middot; FoundMyFitness tactical tier</div>
-          <p>Shorter, high-frequency content focused on actionable tactics. Monetization comes from affiliate links and owned-brand products integrated into problem-solving narratives.</p>
+          <h3>Creator-as-Brand</h3>
+          <div class="tag-line">Paul Saladino (Heart &amp; Soil) &middot; Bryan Johnson (Blueprint) &middot; Jeff Nippard</div>
+          <p>The creator <em>is</em> the CPG brand. Saladino, an MD, built Heart &amp; Soil supplements around his animal-based protocol. Bryan Johnson turned his Blueprint self-experimentation into a supplement and data product line. Jeff Nippard (M.Sc.) runs his own coaching and programming business. Content and product are fully integrated &mdash; every episode is also a pitch for the product line.</p>
           <ul class="archetype-facts">
-            <li><strong>Primary Engine</strong>Short YouTube videos (10&ndash;20 min), high search volume</li>
-            <li><strong>Monetization</strong>Affiliate links, AdSense, own-brand coaching</li>
-            <li><strong>Revenue Mix</strong>~40% affiliates, ~40% sponsors/own brand, ~20% AdSense</li>
-            <li><strong>Expansion Path</strong>Proprietary D2C CPG products</li>
+            <li><strong>Audience</strong>Highly loyal, protocol-adherent, direct-to-purchase</li>
+            <li><strong>Monetization</strong>Almost entirely owned D2C plus retail expansion</li>
+            <li><strong>Production Need</strong>Functional spaces where they can actually demonstrate the protocol on camera</li>
+            <li><strong>Walmart Angle</strong>Retail distribution is the existential growth lever. Bentonville matters.</li>
           </ul>
         </div>
         <div>
           <div class="archetype-panel-side">
-            <h4>KARST Relevance</h4>
-            <p>Less strategic as a hosting venue, but this tier drives <em>regional</em> traffic. DeLauer-style followers are the ones who will drive four hours to try a new facility once they see it.</p>
+            <h4>Why They Come to KARST</h4>
+            <p>Walmart meetings. Supplement manufacturer meetings. Category-buyer introductions. Their brand lives or dies on retail distribution. They're already in Bentonville &mdash; KARST gives them a filming location while they're here.</p>
           </div>
           <div class="archetype-panel-side">
-            <h4>Channel Implication</h4>
-            <p>Treat as earned-media / pull-through, not a partnership tier. One tactical video endorsing KARST's protocols could pressure-test peak-day throughput by itself.</p>
+            <h4>What We Must Provide</h4>
+            <p>Production space that matches a product activation (Cave for recovery protocols, Foundation for training, Canopy for interview and brand content). Plus a practical operating rhythm that accommodates 24&ndash;48 hour drop-ins.</p>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- MOMENTOUS -->
-    <div id="panel-momentous" class="tab-panel">
+    <!-- BRAND-SIDE PRODUCER -->
+    <div id="panel-brand-producer" class="tab-panel">
       <div class="archetype">
         <div class="archetype-lead">
-          <h3>Corporate Ecosystem Backing</h3>
-          <div class="tag-line">Momentous &middot; InsideTracker</div>
-          <p>Not a creator &mdash; but the most important archetype for KARST to understand. Momentous grew 1,000%+ post-merger with Amp Human. Functions simultaneously as a product manufacturer, research grant-maker, and talent collective. Funded Voice In Sport ($500K, 2025) and Collective X ($200K, 2026).</p>
+          <h3>Brand-Side Producer</h3>
+          <div class="tag-line">Momentous &middot; AG1 &middot; LMNT &middot; Eight Sleep &middot; Whoop</div>
+          <p>The CPG brands that sponsor the creator network are themselves becoming producers. Momentous funds research (Voice In Sport, Collective X) and produces long-form content with its ambassadors. AG1 runs its own podcast and content channels. These brands are not just buying ads &mdash; they are producing the shows.</p>
           <ul class="archetype-facts">
-            <li><strong>Structure</strong>Scientific advisory board + ambassador roster</li>
-            <li><strong>Creators on Roster</strong>Huberman, Sims, Starrett, + others</li>
-            <li><strong>Institutional Backing</strong>10 DoD contracts, 175+ pro sports teams</li>
-            <li><strong>What They Don't Have Yet</strong>A physical brand activation site</li>
+            <li><strong>Why They Matter to KARST</strong>They already have budgets for content production. They already send people to Bentonville.</li>
+            <li><strong>Event Format</strong>Product launch events, buyer showcases, experiential activations for retail partners</li>
+            <li><strong>What They Pay For</strong>Space rental, production, catering, guest experience, filmed output</li>
+            <li><strong>Walmart Connection</strong>Every one of these brands either is in Walmart or wants to be</li>
           </ul>
         </div>
         <div>
           <div class="archetype-panel-side">
-            <h4>KARST Relevance</h4>
-            <p>There is a plausible version of KARST where a Momentous-equivalent brand becomes a foundational partner &mdash; supplying the Cave's supplement protocols, co-funding Canopy research programming, subsidizing membership for a demographic segment.</p>
+            <h4>Why They Come to KARST</h4>
+            <p>To host an immersive product launch event during a Walmart buying cycle. To shoot their own creator content with the brand-ambassador creator in their stable. To create a recognizable physical location that shows up across their category.</p>
           </div>
           <div class="archetype-panel-side">
             <h4>The Unexplored Vector</h4>
-            <p>This is the most interesting unexplored revenue vector in our current model. Momentous does not yet have a physical analogue. Neither does InsideTracker. There is a clear opening.</p>
+            <p>None of these brands currently has a physical activation site anywhere. A standing KARST partnership &mdash; supplements in the Cave, diagnostics in the Foundation, branded programming in the Canopy &mdash; is a revenue stream with no established precedent.</p>
           </div>
         </div>
       </div>
@@ -857,9 +845,9 @@
 <!-- REVENUE -->
 <section id="revenue" class="dark">
   <div class="container">
-    <div class="section-label">Aggregate Revenue Picture</div>
-    <h2 class="section-title">Where the Money Actually Is</h2>
-    <p class="section-subtitle">Revenue breakdown across the top tier of evidence-based health creators. Two trends matter most for KARST.</p>
+    <div class="section-label">How Money Moves in the Network</div>
+    <h2 class="section-title">Where the Creator Economy Actually Pays</h2>
+    <p class="section-subtitle">Aggregate revenue across the top tier of evidence-based health creators. The trend line matters more than the current split: creator-owned CPG is taking share from everything else.</p>
 
     <div class="revenue-chart">
       <div class="revenue-row">
@@ -873,7 +861,7 @@
         <div class="revenue-value" style="color: var(--warm-white);">25%</div>
       </div>
       <div class="revenue-row">
-        <div class="revenue-label" style="color: var(--limestone);">Equity / Own Brand</div>
+        <div class="revenue-label" style="color: var(--limestone);">Creator-Owned CPG / Equity</div>
         <div class="revenue-track"><div class="revenue-fill tertiary" style="width: 30%;"></div></div>
         <div class="revenue-value" style="color: var(--warm-white);">15%</div>
       </div>
@@ -890,81 +878,53 @@
     </div>
 
     <div class="callout">
-      <div class="callout-title">Trend One &mdash; Subscriptions Eating Sponsorships</div>
-      <p>Creators increasingly want recurring revenue they control, not cash-for-ads deals. Supercast's top 10 health creators now gross $12M+ in annual subscription revenue alone. KARST membership is the physical analogue to this shift, and we should pitch it that way.</p>
+      <div class="callout-title">Trend &middot; Creator-Owned CPG Is Taking Share</div>
+      <p>The 15% slice labeled "Creator-Owned CPG / Equity" is the fastest-growing segment. Top creators no longer accept pure cash sponsorships &mdash; they take equity or they build their own product. Saladino's Heart &amp; Soil. Johnson's Blueprint. Huberman's sponsor equity. This shift is what makes Bentonville relevant: if the creator <em>is</em> the brand, their CPG needs Walmart.</p>
     </div>
 
     <div class="callout">
-      <div class="callout-title">Trend Two &mdash; Equity Is How Top-Tier Creators Now Partner</div>
-      <p>When we approach a creator about a KARST partnership, the frame should not be "appearance fee + sponsored post." It should be "equity or revenue share in the facility." That aligns incentives over the 5&ndash;10 year horizon a KARST partnership needs to make sense.</p>
+      <div class="callout-title">Implication for KARST Pricing</div>
+      <p>KARST membership should be anchored against premium subscriptions (Attia's $150&ndash;$2,000/yr), not against local gyms. Our audience overlaps with theirs and the emotional purchase is identical: paying for access to an evidence-based wellness operating system. Pricing signals category &mdash; under-pricing puts us in the wrong one.</p>
     </div>
   </div>
 </section>
 
-<!-- LONGEVITY HUBS -->
-<section id="hubs" class="cave-section">
+<!-- NETWORK NODE -->
+<section id="node" class="cave-section">
   <div class="container">
-    <div class="section-label">The Physical Layer</div>
-    <h2 class="section-title">Longevity Hubs &mdash; The Category We're In</h2>
-    <p class="section-subtitle">As the longevity economy scales toward $610B by 2026, a new category of physical facility is emerging: capital-intensive, technologically equipped wellness destinations that serve as the in-person endpoint of the creator network. Not gyms. Not spas. Not clinics.</p>
+    <div class="section-label">The Network Node</div>
+    <h2 class="section-title">Bentonville is the gravity. KARST is the node.</h2>
+    <p class="section-subtitle">The reason creators come to Bentonville is the CPG ecosystem that centralizes here to sell into Walmart. KARST's job is to be the place they land when they do.</p>
 
-    <div class="hub-grid">
-      <div class="hub-card featured">
-        <div class="hub-label">Closest Comp</div>
-        <h4>Submersive</h4>
-        <div class="hub-meta">
-          25,000 sf &middot; Austin, TX &middot; Opening 2026<br>
-          $88 avg ticket &middot; 200K projected visitors/yr
-        </div>
-        <p>Immersive art bathhouse founded by Corvas Brinkerhoff (Meow Wolf co-founder). Partnered with Johns Hopkins' International Arts + Mind Lab for neuroaesthetics rigor. AI-driven sequencing through 12 rooms &mdash; thermal grottos, cold plunges, saltwater pools, astral projection installations. Plans for 11 additional global locations after Austin.</p>
-        <div class="karst-relevance">
-          <strong>KARST Read</strong>
-          Same square footage class (25K vs our ~20K). Same audience (evidence-based wellness). Same 2026 era. Different model: they are day-pass + art-experience; we are membership-first + cave-to-sky. Both can work in parallel markets. This belongs in our formal comps set and our unit economics should be pressure-tested against their 200K/year projection.
-        </div>
+    <div class="node-diagram">
+      <div class="node-cluster left">
+        <div class="node-label">Who Shows Up</div>
+        <div class="node-item">Credentialed hosts</div>
+        <div class="node-item">Non-credentialed platformers</div>
+        <div class="node-item highlight">Creator-as-brand founders</div>
+        <div class="node-item">Brand-side producers</div>
       </div>
-
-      <div class="hub-card">
-        <div class="hub-label">Luxury Ceiling</div>
-        <h4>Clinique La Prairie Hubs</h4>
-        <div class="hub-meta">
-          Dubai (SIRO at One Za'abeel), Australia, China<br>
-          Elite HNW positioning
-        </div>
-        <p>Swiss medical spa expanding urban Longevity Hubs globally. Elite diagnostics + cellular rejuvenation + integrated fitness recovery. The luxury ceiling of this category &mdash; institutional capital flowing into physical longevity infrastructure at the highest price point.</p>
-        <div class="karst-relevance">
-          <strong>KARST Read</strong>
-          Not a direct comp &mdash; different geography, different price tier. But useful evidence in investor conversations that the category exists and is attracting institutional capital at scale.
-        </div>
+      <div class="node-center">
+        <div class="node-center-label">Physical Node</div>
+        <div class="node-center-title">KARST<br>Bentonville</div>
       </div>
-
-      <div class="hub-card">
-        <div class="hub-label">Macro Trend</div>
-        <h4>Urban Longevity Ecology</h4>
-        <div class="hub-meta">
-          RIOS &middot; Blue Zones-informed design<br>
-          Cross-generational communities
-        </div>
-        <p>Architecture firms designing developments informed by Blue Zones research &mdash; natural light, daily movement, sensory balance, community integration. The built environment itself is being restructured to support extended healthspans.</p>
-        <div class="karst-relevance">
-          <strong>KARST Read</strong>
-          Useful frame when we talk with Ramsey about embedding KARST in a larger mixed-use development. The category exists. We are not inventing it &mdash; we are joining it.
-        </div>
-      </div>
-
-      <div class="hub-card">
-        <div class="hub-label">Regional Precedents</div>
-        <h4>Neighborhood Bathhouses</h4>
-        <div class="hub-meta">
-          Othership (Toronto/NYC), Sauna House (Asheville)<br>
-          ~3,000&ndash;8,500 sf footprint
-        </div>
-        <p>Smaller-footprint precedents already validated. Othership built a cult community around breathwork + contrast; Sauna House expanded a franchise model across the Southeast. Both operate below the Longevity Hub tier but prove the demand.</p>
-        <div class="karst-relevance">
-          <strong>KARST Read</strong>
-          Floor of the category. KARST at 20K sf sits between these neighborhood operators and the full Longevity Hub scale &mdash; which is a defensible middle position.
-        </div>
+      <div class="node-cluster right">
+        <div class="node-label">Who's Already Here</div>
+        <div class="node-item">Walmart HQ (0.5 mi)</div>
+        <div class="node-item">Supplement manufacturers</div>
+        <div class="node-item highlight">CPG buyer meetings (weekly)</div>
+        <div class="node-item">Wellness tech vendor reps</div>
       </div>
     </div>
+
+    <div class="callout">
+      <div class="callout-title">The Unlock</div>
+      <p>A creator like Paul Saladino is <em>already</em> coming to Bentonville to pitch Heart &amp; Soil to Walmart buyers. A supplement brand like Momentous is <em>already</em> sending people here. Jeff Nippard's coaching platform wants to scale through retail, which means coming here. The creators are coming regardless. What's missing is the place they film, hang out, recover, and produce while they're in town.</p>
+      <p>That place doesn't exist yet in Bentonville. It can be KARST.</p>
+    </div>
+
+    <h3 style="font-family: var(--font-display); font-size: 1.5rem; margin: 3rem 0 1rem; color: var(--warm-white);">Physical comps &mdash; at our scale</h3>
+    <p style="font-size: 0.9375rem; line-height: 1.75; color: var(--limestone); margin-bottom: 1.5rem;">At 8,400 sf programmatic (5,400 enclosed + 3,000 rooftop), KARST sits between neighborhood bathhouses and larger destination facilities. This is a defensible middle position with specific precedents, not a new category.</p>
 
     <div class="table-wrap">
       <table class="comp-table">
@@ -973,49 +933,51 @@
             <th>Facility</th>
             <th>Scale</th>
             <th>Model</th>
-            <th>Audience</th>
-            <th>Positioning</th>
+            <th>What It Proves</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Submersive (Austin)</td>
-            <td>25,000 sf</td>
-            <td>Day-pass, art-led</td>
-            <td>Biohacking-curious</td>
-            <td>Experience-first</td>
+            <td>Aire Ancient Baths</td>
+            <td>~8,000 sf</td>
+            <td>Session-only, $90&ndash;$200</td>
+            <td>$500&ndash;$800/sf revenue on destination pricing. Closest scale comp.</td>
           </tr>
           <tr class="karst-row">
             <td>KARST (Bentonville)</td>
-            <td>~20,000 sf</td>
-            <td>Membership + day-pass</td>
-            <td>Evidence-based wellness</td>
-            <td>Cave-to-sky narrative</td>
+            <td>8,400 sf programmatic</td>
+            <td>Membership + destination + production</td>
+            <td>$549/sf modeled. Media upside layered on top.</td>
           </tr>
           <tr>
-            <td>Clinique La Prairie</td>
-            <td>Varies (luxury)</td>
-            <td>Medical-grade packages</td>
-            <td>HNW, institutional</td>
-            <td>Clinical ceiling</td>
+            <td>Russian &amp; Turkish Baths (NYC)</td>
+            <td>Multi-level, ~10K sf</td>
+            <td>Day session + ritual membership</td>
+            <td>130+ years of operation. Ritual (platza) is the destination draw.</td>
+          </tr>
+          <tr>
+            <td>Sauna House (Asheville)</td>
+            <td>4,100 sf</td>
+            <td>Membership + day pass</td>
+            <td>$418/sf peak. Most direct operating comp. Franchise expansion.</td>
           </tr>
           <tr>
             <td>Othership</td>
             <td>~4,000&ndash;6,000 sf</td>
             <td>Class-based membership</td>
-            <td>Urban wellness</td>
-            <td>Community + breathwork</td>
+            <td>Community + breathwork flywheel. Urban wellness precedent.</td>
           </tr>
           <tr>
-            <td>Sauna House</td>
-            <td>~6,700&ndash;8,500 sf</td>
-            <td>Hourly / membership</td>
-            <td>Regional Southeast</td>
-            <td>Accessible Nordic</td>
+            <td>L&ouml;yly (Helsinki)</td>
+            <td>~12K sf</td>
+            <td>Day pass + sauna restaurant</td>
+            <td>Architectural pilgrimage destination. Global wellness travel proof.</td>
           </tr>
         </tbody>
       </table>
     </div>
+
+    <p style="font-size: 0.8125rem; line-height: 1.65; color: var(--riverstone); margin-top: 1rem;">What none of these facilities have: a production-ready content studio and a built-in CPG-brand pipeline next door. That is KARST's specific difference &mdash; not the sauna, not the architecture.</p>
   </div>
 </section>
 
@@ -1024,93 +986,92 @@
   <div class="container">
     <div class="section-label">What This Means For Us</div>
     <h2 class="section-title">Five Tactical Implications</h2>
-    <p class="section-subtitle">Concrete decisions this analysis forces us to make &mdash; now, while space programming and capital structure are still open.</p>
+    <p class="section-subtitle">Specific decisions this analysis forces on space programming, partnerships, pricing, and brand strategy.</p>
 
     <div class="impl-list">
       <div class="impl-card">
         <div class="impl-level">Implication 01 &middot; The Canopy</div>
-        <h3>The media studio is not an amenity. It's infrastructure.</h3>
-        <p>If we take the creator-network thesis seriously, the Canopy's media studio is the highest-leverage square footage in the building. It is where we earn audience.</p>
-        <p><strong>Spec implications:</strong> broadcast-grade audio isolation (not gym-adjacent); cinematic lighting and deep black backdrop; multi-camera setup for 2&ndash;4 hour long-form recording; private entrance so visiting creators don't walk through the member floor; green room that respects the practitioner's workflow.</p>
+        <h3>The 2,000 sf Canopy is production infrastructure.</h3>
+        <p>The v5 spec already has the Canopy as a semi-enclosed, weather-protected, event-capable space with operable walls and Ozark sightlines. The unspoken brief is that this is our production studio. Every spec decision should be made with that in mind.</p>
+        <p><strong>Concrete requirements:</strong> broadcast-grade audio isolation (not gym-adjacent); cinematic lighting grid built into the ceiling system; hardwired power and data for camera and streaming rigs; multi-camera sightlines to the Momentary view; sound-treated surfaces that don't read as "wellness cliche" on camera.</p>
       </div>
 
       <div class="impl-card">
-        <div class="impl-level">Implication 02 &middot; Partnerships</div>
-        <h3>We need a three-tier creator partnership framework.</h3>
-        <p>Before we approach anyone, we should have a structured set of asks. Three tiers worth building out:</p>
+        <div class="impl-level">Implication 02 &middot; Recruiting</div>
+        <h3>The recruiting pitch is Bentonville, not KARST.</h3>
+        <p>A creator like Saladino won't fly to Bentonville <em>for</em> KARST. They'll fly here for a Walmart meeting or a supplement manufacturer meeting, and KARST will be where they spend the rest of the trip. That inverts how we pitch.</p>
+        <p>Instead of "come film at our beautiful facility," the outreach is "you're already coming here &mdash; here's the place to land." We should map the CPG brands each creator partners with and identify their Bentonville travel cadence. The pitch list writes itself from there.</p>
+      </div>
+
+      <div class="impl-card">
+        <div class="impl-level">Implication 03 &middot; Creator Residencies</div>
+        <h3>Design a three-tier residency framework now, not later.</h3>
         <div class="tiers">
           <div class="tier">
             <div class="tier-num">TIER 01</div>
-            <h4>Drop-In Residency</h4>
-            <p>Traveling creator uses the media studio for a weekend. Films with local practitioners. Gets promotional footage.</p>
+            <h4>Drop-In Shoot</h4>
+            <p>24&ndash;48 hours. Creator uses Canopy + Cave for a single episode. Turnaround measured in hours. No commitment required.</p>
             <div class="tier-commit">Low friction &middot; high volume</div>
           </div>
           <div class="tier">
             <div class="tier-num">TIER 02</div>
-            <h4>Programming Partnership</h4>
-            <p>Creator runs a protocol series at KARST. Revenue share on programming. Their audience becomes our pipeline.</p>
-            <div class="tier-commit">Middle tier &middot; sustained</div>
+            <h4>Protocol Residency</h4>
+            <p>One-week creator programs. Filmed series, live events, member sessions. Revenue share + co-marketing.</p>
+            <div class="tier-commit">Sustained &middot; season-length</div>
           </div>
           <div class="tier">
             <div class="tier-num">TIER 03</div>
-            <h4>Equity / Advisory</h4>
-            <p>One or two creators (or Momentous-tier brands) take equity as founding partners. Attia-model commitment.</p>
+            <h4>Founding Partner</h4>
+            <p>One or two creator or CPG brand partners with equity or long-term retainers. Category-exclusive.</p>
             <div class="tier-commit">5&ndash;10 year horizon</div>
           </div>
         </div>
       </div>
 
       <div class="impl-card">
-        <div class="impl-level">Implication 03 &middot; Pricing</div>
-        <h3>Anchor membership pricing against premium subscriptions, not local gyms.</h3>
-        <p>Attia's audience pays $150&ndash;$2,000/year for an audio subscription. Supercast's top health creators gross $12M+ combined on subscriptions alone. Our audience overlaps with theirs. KARST membership is the tangible version of that same purchase.</p>
-        <p>If we price against NWA gym comps we leave money on the table and mis-signal the category.</p>
+        <div class="impl-level">Implication 04 &middot; Brand-Side Revenue</div>
+        <h3>A Momentous-tier brand partnership is the largest unexplored revenue line.</h3>
+        <p>None of the major supplement, recovery, or wearable brands has a physical activation site. KARST can be the first &mdash; supplements in the Cave, diagnostics in the Foundation, branded content in the Canopy, product launches on the Sky. The v5 financial model already includes $150K/yr in events; a standing brand partnership could 2&ndash;3x that number.</p>
+        <p>This conversation should happen <em>before</em> we finalize the retail, supplement, and apparel strategy. A founding brand partner could fund their own retail shelf.</p>
       </div>
 
       <div class="impl-card">
-        <div class="impl-level">Implication 04 &middot; Corporate Partnership</div>
-        <h3>A Momentous-tier brand sponsorship is our largest unexplored revenue vector.</h3>
-        <p>Momentous does not yet have a physical brand activation site. Neither does InsideTracker. There is a clear opening for a KARST-style facility to become that site &mdash; supplement protocols in the Cave, diagnostic screening in the Foundation, programming grants in the Canopy.</p>
-        <p>This deserves a dedicated strategic conversation with Ramsey and the founding team before we finalize the supplement/apparel/retail strategy.</p>
-      </div>
-
-      <div class="impl-card">
-        <div class="impl-level">Implication 05 &middot; Cipher</div>
-        <h3>Cipher's role maps cleanly onto the "silent clinical partner" pattern.</h3>
-        <p>Johns Hopkins' International Arts + Mind Lab backs Submersive. The Harvard T.H. Chan Creator Program backs credentialed creators. Cipher provides KARST's protocol credibility without ever appearing as a co-brand.</p>
-        <p>This is the correct posture. It is consistent with our existing brand architecture and with what's working for other facilities in the category.</p>
+        <div class="impl-level">Implication 05 &middot; Consumer Brand</div>
+        <h3>KARST is a consumer brand first, a facility second.</h3>
+        <p>If we succeed, the KARST name becomes recognizable to wellness consumers nationally through content &mdash; long before most of them ever visit Bentonville. That's the same pattern Aire, Othership, and Russian &amp; Turkish Baths followed. It's also the logic behind the v5 media revenue ramp ($36K seed / $500K+ mature).</p>
+        <p>Implication: the brand, the content output, and the on-camera design of the space all deserve the same scrutiny as the financial model. A facility that operates well but films badly will never become the network node we need it to be.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- OPEN QUESTIONS -->
+<!-- QUESTIONS -->
 <section id="questions" class="dark">
   <div class="container-narrow">
     <div class="section-label">For Discussion</div>
     <h2 class="section-title">Five Questions for the Team</h2>
-    <p class="section-subtitle">These are the decisions this analysis forces. Each has a cost if we defer it past space programming.</p>
+    <p class="section-subtitle">Each of these has a cost if deferred past the current space-programming and capital-structure window.</p>
 
     <ol class="questions" style="color: var(--limestone);">
-      <li>Do we build the Canopy media studio to broadcast-grade spec from day one (higher capex, opens Tier 1 partnerships immediately) or retrofit later?</li>
-      <li>Who on the KARST team owns creator partnerships? This is a distinct skill set from member operations and we don't have a named owner yet.</li>
-      <li>Does Submersive's projected 200K-visitor/year throughput change how we think about day-pass vs. membership balance in year one?</li>
-      <li>Is there a Momentous-tier brand we should be in conversation with <em>before</em> we finalize the supplement / apparel / retail strategy?</li>
-      <li>What is the equity structure that would make a top-tier creator partnership make sense for both sides?</li>
+      <li>Do we build the Canopy to broadcast-grade production spec from day one, or retrofit after opening? The cost difference is real, but a retrofit delays Tier 1 creator residencies by 12&ndash;18 months.</li>
+      <li>Who on the KARST team owns creator and brand-side partnerships? This is a separate role from membership operations and we don't have a named owner yet.</li>
+      <li>Which 10 creator-as-brand founders (Saladino-style) are we actively targeting, and what are their Bentonville travel triggers (buyer meetings, supplement manufacturer visits, Walmart cycles)?</li>
+      <li>Which one or two CPG brands (Momentous-tier) should we open a founding-partner conversation with before we finalize the retail and supplement strategy?</li>
+      <li>What is the pre-opening content plan? The creator network thesis requires KARST to exist as a brand before the building does. Who's producing the first season?</li>
     </ol>
 
     <div class="callout" style="margin-top: 3rem;">
-      <div class="callout-title">Recommended Next Step</div>
-      <p>Add Submersive to <span style="font-family: var(--font-mono); font-size: 0.85em;">research/comparable-concepts-research.md</span> as our closest physical comp, and pressure-test our Year 1 and Year 3 projections against their 200K-visitor throughput. Separately, identify one Momentous-tier brand to open a partnership conversation with before Ramsey follow-up.</p>
+      <div class="callout-title">The One-Sentence Summary</div>
+      <p>KARST is a physical node in a decentralized, reputation-based creator network &mdash; the place creators land when they're already in Bentonville to service their CPG business with Walmart.</p>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <p><span>KARST</span> &mdash; Creator Content Houses &amp; Longevity Hubs</p>
-  <p style="margin-top: 0.5rem;">Strategic brief for internal team use &middot; Drawn from external market analysis of evidence-based health media networks (2026)</p>
-  <p style="margin-top: 0.25rem;">Source research on file in the karst repo at <span style="font-family: var(--font-mono); font-size: 0.9em;">research/creator-content-houses.md</span></p>
+  <p><span>KARST</span> &mdash; The Network Node</p>
+  <p style="margin-top: 0.5rem;">Strategic brief for internal team use &middot; Aligned with v5 site analysis (8,400 sf programmatic, dual-entity structure)</p>
+  <p style="margin-top: 0.25rem;">Not linked from main site navigation &middot; Shareable by direct URL only</p>
 </footer>
 
 <script>
