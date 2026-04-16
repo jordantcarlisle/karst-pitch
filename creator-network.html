@@ -85,7 +85,7 @@
 
     /* HERO */
     .hero {
-      min-height: 62vh;
+      min-height: 72vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -95,14 +95,89 @@
       color: var(--warm-white);
       padding: 8rem 2rem 5rem;
       position: relative;
+      overflow: hidden;
+      isolation: isolate;
     }
-    .hero::before {
-      content: '';
+    .hero-bg {
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at 50% 80%, rgba(184,115,51,0.08) 0%, transparent 60%);
+      z-index: 0;
+      overflow: hidden;
     }
-    .hero-content { position: relative; z-index: 2; max-width: 840px; }
+    .hero-bg img {
+      position: absolute;
+      inset: -2%;
+      width: 104%;
+      height: 104%;
+      object-fit: cover;
+      object-position: center 55%;
+      transform-origin: 52% 58%;
+      animation: heroKenBurns 42s cubic-bezier(.45,.05,.55,.95) infinite alternate;
+      will-change: transform;
+    }
+    @keyframes heroKenBurns {
+      0% {
+        transform: scale(1.04) translate3d(0.2%, 0, 0);
+        filter: saturate(1.0) brightness(1.0);
+      }
+      50% {
+        transform: scale(1.10) translate3d(-1.5%, -0.8%, 0);
+        filter: saturate(1.04) brightness(1.02);
+      }
+      100% {
+        transform: scale(1.06) translate3d(1.1%, 0.3%, 0);
+        filter: saturate(1.02) brightness(0.98);
+      }
+    }
+    .hero-scrim {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 42%, rgba(26,26,26,0.3) 0%, rgba(26,26,26,0.55) 60%, rgba(26,26,26,0.78) 100%),
+        linear-gradient(to bottom, rgba(26,26,26,0.5) 0%, rgba(26,26,26,0.15) 30%, rgba(26,26,26,0.35) 65%, rgba(26,26,26,0.9) 100%);
+    }
+    .hero-glow {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background: radial-gradient(ellipse 60% 45% at 50% 78%, rgba(184,115,51,0.18) 0%, rgba(184,115,51,0.08) 40%, transparent 70%);
+      mix-blend-mode: screen;
+      animation: heroGlowPulse 9s ease-in-out infinite alternate;
+    }
+    @keyframes heroGlowPulse {
+      0% { opacity: 0.55; }
+      100% { opacity: 1; }
+    }
+    .hero-grain {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+      opacity: 0.12;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.96  0 0 0 0 0.94  0 0 0 0 0.89  0 0 0 0.35 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+      background-size: 160px 160px;
+      animation: heroGrainShift 1.2s steps(4) infinite;
+    }
+    @keyframes heroGrainShift {
+      0%   { background-position: 0 0; }
+      25%  { background-position: -40px 20px; }
+      50%  { background-position: 20px -40px; }
+      75%  { background-position: -30px -20px; }
+      100% { background-position: 40px 30px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-bg img,
+      .hero-glow,
+      .hero-grain {
+        animation: none;
+      }
+      .hero-bg img { transform: scale(1.02); }
+    }
+    .hero-content { position: relative; z-index: 4; max-width: 840px; }
     .hero-label {
       font-family: var(--font-mono);
       font-size: 11px;
@@ -693,6 +768,12 @@
 
 <!-- HERO -->
 <header class="hero">
+  <div class="hero-bg" aria-hidden="true">
+    <img src="renders/concept-002/exterior-hero.png" alt="">
+  </div>
+  <div class="hero-scrim" aria-hidden="true"></div>
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="hero-grain" aria-hidden="true"></div>
   <div class="hero-content">
     <div class="hero-label">Strategic Brief &middot; For the KARST Team</div>
     <h1>KARST is a <span>Network Node</span></h1>
