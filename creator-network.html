@@ -479,6 +479,59 @@
     }
     .table-wrap table { margin: 0; }
 
+    /* CONCEPT GALLERY */
+    .concept-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .concept-grid .concept-wide {
+      grid-column: 1 / -1;
+    }
+    .concept-item {
+      position: relative;
+      border-radius: 3px;
+      overflow: hidden;
+      background: var(--cave-mid);
+      aspect-ratio: 16 / 10;
+    }
+    .concept-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .concept-item .concept-caption {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 1.25rem 1.5rem;
+      background: linear-gradient(to top, rgba(26,26,26,0.92) 0%, rgba(26,26,26,0.7) 60%, transparent 100%);
+      color: var(--warm-white);
+    }
+    .concept-item .concept-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cedar);
+      margin-bottom: 0.35rem;
+    }
+    .concept-item .concept-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      line-height: 1.3;
+      margin-bottom: 0.35rem;
+    }
+    .concept-item .concept-note {
+      font-size: 0.8125rem;
+      color: var(--limestone);
+      line-height: 1.55;
+      max-width: 32rem;
+    }
+
     /* IMPLICATIONS */
     .impl-list {
       display: grid;
@@ -598,6 +651,7 @@
       .hero-stats { gap: 1.75rem; }
       .archetype { grid-template-columns: 1fr; gap: 1.75rem; }
       .tiers { grid-template-columns: 1fr; }
+      .concept-grid { grid-template-columns: 1fr; }
       .tabs { flex-direction: column; border-bottom: none; }
       .tab { border-bottom: 1px solid var(--limestone); text-align: left; padding: 1rem; }
       .tab.active::after { bottom: -1px; }
@@ -630,6 +684,7 @@
       <li><a href="#archetypes">Archetypes</a></li>
       <li><a href="#revenue">Revenue</a></li>
       <li><a href="#node">Network Node</a></li>
+      <li><a href="#space">The Space</a></li>
       <li><a href="#implications">Implications</a></li>
       <li><a href="#questions">Questions</a></li>
     </ul>
@@ -978,6 +1033,58 @@
     </div>
 
     <p style="font-size: 0.8125rem; line-height: 1.65; color: var(--riverstone); margin-top: 1rem;">What none of these facilities have: a production-ready content studio and a built-in CPG-brand pipeline next door. That is KARST's specific difference &mdash; not the sauna, not the architecture.</p>
+  </div>
+</section>
+
+<!-- THE SPACE -->
+<section id="space">
+  <div class="container">
+    <div class="section-label">The Space</div>
+    <h2 class="section-title">What creators show up to</h2>
+    <p class="section-subtitle">Concept renders of the building every creator archetype is producing against. The architecture is specific enough to read on camera, grounded enough to feel like a place &mdash; not a set.</p>
+
+    <div class="concept-grid">
+      <div class="concept-item concept-wide" style="aspect-ratio: 21 / 9;">
+        <img src="renders/concept-002/exterior-hero.png" alt="KARST exterior at golden hour — timber-clad upper structure with rooftop pergola over a limestone-colored ground floor">
+        <div class="concept-caption">
+          <div class="concept-label">Exterior &middot; 701 SE 5th</div>
+          <div class="concept-title">The establishing shot.</div>
+          <div class="concept-note">Ozark-Nordic vernacular &mdash; timber clad upper volume, limestone ground floor, rooftop pergola. On Razorback Greenway, one block from the Momentary, a half-mile from Walmart HQ. This is the exterior that appears in every creator's B-roll.</div>
+        </div>
+      </div>
+
+      <div class="concept-item">
+        <img src="renders/concept-002/cave-thermal.png" alt="The Cave interior — stone arches, warm timber, mineral soak pool, and sauna visible through archway">
+        <div class="concept-caption">
+          <div class="concept-label">The Cave &middot; Ground Floor</div>
+          <div class="concept-title">The protocol backdrop.</div>
+          <div class="concept-note">Contrast therapy on camera. The backdrop Huberman, Saladino, and Nippard actually need when they film the protocols they talk about.</div>
+        </div>
+      </div>
+
+      <div class="concept-item">
+        <img src="renders/concept-002/foundation-loft.png" alt="The Foundation interior — timber-clad mezzanine loft above a warm open floor with natural light and high ceilings">
+        <div class="concept-caption">
+          <div class="concept-label">Foundation + Loft &middot; Ground Floor + Mezzanine</div>
+          <div class="concept-title">The training + breathwork set.</div>
+          <div class="concept-note">Open functional training floor with the 800 sf breathwork loft above. Doubles as a set for movement, class recording, and in-person audience shoots.</div>
+        </div>
+      </div>
+
+      <div class="concept-item concept-wide" style="aspect-ratio: 21 / 9;">
+        <img src="renders/concept-002/exterior-aerial.png" alt="Aerial view of KARST — semi-enclosed rooftop Canopy with pergola, green roof, and open-air Sky terrace above ground-floor volume">
+        <div class="concept-caption">
+          <div class="concept-label">Canopy + Sky &middot; Rooftop</div>
+          <div class="concept-title">The production floor.</div>
+          <div class="concept-note">The 2,000 sf Canopy is the content studio &mdash; operable walls, weather-protected, wired for broadcast. The 1,000 sf open-air Sky is the event overlay with direct sightlines to the Momentary. This is where creator residencies and brand activations happen.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top: 2.5rem;">
+      <div class="callout-title">Why the space matters to the thesis</div>
+      <p>Creators don't travel for facilities &mdash; they travel for a reason and then need a place to work. The specifics of this building (the Cave for protocol footage, the Canopy for long-form, the Sky for brand activations) are what make a 24&ndash;48 hour Bentonville trip productive instead of just logistical. The architecture is the flywheel.</p>
+    </div>
   </div>
 </section>
 
