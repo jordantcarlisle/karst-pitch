@@ -1239,6 +1239,192 @@
       .team-grid { grid-template-columns: 1fr; }
       .hero-stats { flex-direction: column; gap: 1.5rem; }
     }
+
+    /* ========== STORY SECTION ========== */
+    .story-prose {
+      max-width: 720px;
+    }
+    .story-prose p {
+      font-size: 1.0625rem;
+      line-height: 1.85;
+      margin-bottom: 1.5rem;
+      color: var(--charcoal);
+    }
+    .story-prose em {
+      color: var(--cedar);
+      font-style: italic;
+    }
+    .story-tagline {
+      font-family: var(--font-display);
+      font-size: 1.375rem;
+      font-style: italic;
+      color: var(--cedar);
+      line-height: 1.45;
+      margin-top: 2rem;
+    }
+    .story-tagline strong {
+      font-style: normal;
+      font-weight: 400;
+      color: var(--charcoal);
+    }
+    .story-pullquote {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(1.5rem, 2.5vw, 1.75rem);
+      line-height: 1.45;
+      color: var(--charcoal);
+      margin: 2.5rem 0;
+      padding-left: 1.5rem;
+      border-left: 2px solid var(--cedar);
+      max-width: 620px;
+    }
+
+    /* ========== FUNDING SCENARIOS ========== */
+    .scenarios-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0 2rem;
+    }
+    .scenarios-table th,
+    .scenarios-table td {
+      padding: 1rem 1rem;
+      border-bottom: 1px solid var(--limestone);
+      vertical-align: top;
+      text-align: left;
+    }
+    .scenarios-table th {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--riverstone);
+      font-weight: 500;
+      border-bottom: 2px solid var(--charcoal);
+      padding-bottom: 1.25rem;
+    }
+    .scenarios-table th.recommended {
+      color: var(--cedar);
+    }
+    .scenarios-table th .rec-tag {
+      display: inline-block;
+      font-size: 10px;
+      margin: 0 0 0.6rem 0;
+      padding: 4px 10px;
+      letter-spacing: 0.16em;
+      color: var(--cedar);
+      background: rgba(184, 115, 51, 0.12);
+      border: 1px solid rgba(184, 115, 51, 0.45);
+      border-radius: 2px;
+      text-transform: uppercase;
+      font-weight: 500;
+      font-family: var(--font-mono);
+    }
+    .scenarios-table .row-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--riverstone);
+      width: 18%;
+    }
+    .scenarios-table td:not(.row-label) {
+      font-size: 0.9375rem;
+      line-height: 1.55;
+      color: var(--charcoal);
+      width: 27%;
+    }
+    .scenarios-table td.recommended {
+      background: rgba(184, 115, 51, 0.04);
+    }
+    .scenarios-rec {
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      color: var(--charcoal);
+      border-left: 2px solid var(--cedar);
+      padding: 1rem 1.5rem;
+      background: rgba(184, 115, 51, 0.04);
+      max-width: 760px;
+    }
+    .scenarios-rec strong {
+      color: var(--cedar);
+    }
+
+    @media (max-width: 800px) {
+      .scenarios-table {
+        display: block;
+        overflow-x: auto;
+        white-space: normal;
+      }
+      .scenarios-table .row-label {
+        width: auto;
+        min-width: 140px;
+      }
+    }
+
+    /* ========== PRINT / PDF ========== */
+    @media print {
+      @page {
+        size: letter;
+        margin: 0.5in;
+      }
+
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      nav, .scroll-indicator, .hamburger { display: none !important; }
+
+      .hero-bg, .hero-scrim, .hero-glow, .hero-grain { display: none !important; }
+
+      body {
+        background: var(--warm-white);
+        font-size: 10.5pt;
+        line-height: 1.55;
+      }
+
+      section {
+        padding: 1.25rem 0 !important;
+        min-height: auto !important;
+      }
+
+      .hero {
+        padding: 1.5rem 0 !important;
+        min-height: auto !important;
+        background: var(--warm-white) !important;
+        color: var(--charcoal) !important;
+        text-align: left !important;
+        align-items: flex-start !important;
+      }
+      .hero h1, .hero .tagline, .hero .summary, .hero .hero-stat .number, .hero .hero-label {
+        color: var(--charcoal) !important;
+      }
+      .hero .tagline { color: var(--cedar) !important; }
+      .hero-stats { gap: 1.5rem !important; }
+
+      /* Dark sections retain their look in print */
+      .dark-section, .ask-section, .cave-section {
+        background: var(--charcoal) !important;
+        color: var(--warm-white) !important;
+      }
+
+      /* Avoid splitting key visual units across pages */
+      .entity-card, .ask-card, .scenarios-rec, .scenarios-table,
+      .fin-table, .team-member, .doc-link, .story-pullquote {
+        page-break-inside: avoid;
+      }
+
+      /* Major sections start on a new page */
+      #propco, #combined, #ask {
+        page-break-before: always;
+      }
+
+      .section-title { font-size: 1.5rem !important; }
+      .section-subtitle { margin-bottom: 1rem !important; }
+
+      a { color: inherit; text-decoration: none; }
+      *:hover { transition: none !important; }
+    }
   </style>
 </head>
 <body>
@@ -1248,12 +1434,14 @@
     <div class="nav-inner">
       <a href="index.html" class="logo">KARST</a>
       <ul class="nav-links">
+        <li><a href="#story">Story</a></li>
         <li><a href="#property">Property</a></li>
         <li><a href="#structure">Structure</a></li>
         <li><a href="#propco">Real Estate Co.</a></li>
         <li><a href="#opco">KARST OpCo</a></li>
         <li><a href="#combined">Financials</a></li>
         <li><a href="#team">Team</a></li>
+        <li><a href="#scenarios">Phasing</a></li>
         <li><a href="#ask">The Ask</a></li>
       </ul>
       <button class="hamburger" aria-label="Menu">
@@ -1297,6 +1485,21 @@
     <div class="scroll-indicator">
       <span>Scroll</span>
       <div class="line"></div>
+    </div>
+  </section>
+
+  <!-- THE STORY -->
+  <section id="story">
+    <div class="container">
+      <div class="section-label">Our Story</div>
+      <h2 class="section-title">Bentonville has always known the healing power of water and stone.</h2>
+      <div class="story-prose">
+        <p>The Ozarks sit on Paleozoic limestone &mdash; 350 million years of rain dissolving stone, carving caves, and returning to the surface as filtered water. <em>Karst</em> is the geological term for this landscape, and the state's whole identity around water comes from it.</p>
+        <p>In 1910, the Park Springs Sanitarium opened just north of downtown &mdash; a three-story facility on 10 acres with four natural springs: Park, Kidney, Crystal, and Nelogany. Seventy-five guests at a time came to drink the mineral water, soak in therapeutic baths, and reset. Civil War reunions met there. Families rode the railroad in from Rogers to spend a week by the water. Park Springs was Bentonville's original gathering place &mdash; built around springs, not storefronts.</p>
+        <p>That history didn't survive the fires and the decades. But the springs are still there. The same karst system that fed them still runs beneath Bentonville.</p>
+        <p class="story-pullquote">The instinct that drew people to this land for healing never left.</p>
+        <p class="story-tagline">KARST is Bentonville picking that story back up. <strong>Ancient ground. Present moment.</strong></p>
+      </div>
     </div>
   </section>
 
@@ -2053,6 +2256,60 @@
   </section>
 
   <!-- THE ASK -->
+  <!-- FUNDING SCENARIOS -->
+  <section id="scenarios">
+    <div class="container">
+      <div class="section-label">The Phasing</div>
+      <h2 class="section-title">Three paths to fund this.</h2>
+      <p class="section-subtitle">Same project. Same total. Different timing. Each path stages the $7.9M raise differently to match the risk appetite of the room you're in.</p>
+
+      <table class="scenarios-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Path 1 &middot; Pop-Up Proof</th>
+            <th class="recommended"><span class="rec-tag">Recommended</span><br>Path 2 &middot; Anchor Now</th>
+            <th>Path 3 &middot; Open Complete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="row-label">Phase 1 raise</td>
+            <td>$300K Friends &amp; Family</td>
+            <td class="recommended">~$5.5M (PropCo + lean OpCo)</td>
+            <td>~$7.8M (full PropCo + OpCo)</td>
+          </tr>
+          <tr>
+            <td class="row-label">What Phase 1 opens</td>
+            <td>Pop-up at leased space &mdash; sauna, plunge, classes</td>
+            <td class="recommended">Cave + Foundation at 701 (Loft + Rooftop deferred)</td>
+            <td>Full build at 701, all four zones</td>
+          </tr>
+          <tr>
+            <td class="row-label">Phase 2 raise</td>
+            <td>~$7.8M after pop-up validates demand</td>
+            <td class="recommended">~$1.5M for Loft + Rooftop addition (Year 2&ndash;3)</td>
+            <td>&mdash;</td>
+          </tr>
+          <tr>
+            <td class="row-label">Time to fully open</td>
+            <td>~24 months</td>
+            <td class="recommended">Lean open Year 1 &middot; Full open Year 3</td>
+            <td>12&ndash;18 months</td>
+          </tr>
+          <tr>
+            <td class="row-label">Why pick this</td>
+            <td>F&amp;F-only de-risks the institutional ask</td>
+            <td class="recommended">Smallest institutional check; property anchored Day 1</td>
+            <td>Fastest path to full vision; hardest fundraise</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="scenarios-rec"><strong>Recommendation: Path 2.</strong> The property is acquired immediately, so the collateralization story is intact from day one. The rooftop is earned via Year 2&ndash;3 cash flow rather than asked for on faith.</p>
+    </div>
+  </section>
+
   <section class="ask-section" id="ask">
     <div class="container">
       <div class="section-label" style="color: var(--cedar);">The Ask</div>
